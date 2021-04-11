@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import {Form, Input, Button} from 'antd'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import firebase from '../../fbConfig'
 import './styles.scss'
 
 
 const Login = () =>{
+  const history = useHistory()
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -35,6 +36,10 @@ const Login = () =>{
             firebase.auth().signInWithEmailAndPassword(credentials.email , credentials.password)
             .then(res =>{
                 console.log('Successfully logged in')
+
+                //Go to the home page
+                history.push('/home')
+                
             }).catch(err=>{
                 console.log('user not present')
                 setCredentials({
