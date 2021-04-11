@@ -1,13 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import {Form, Input, Button} from 'antd'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, Redirect, useHistory} from 'react-router-dom'
+import {UserContext} from '../../contexts/UserContext'
 import firebase from '../../fbConfig'
 import './styles.scss'
 
 
 const Login = () =>{
   const history = useHistory()
+  const {user} = useContext(UserContext)
+  console.log(user)
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -50,7 +53,12 @@ const Login = () =>{
         }
       
     }
-    
+
+
+    if(user) {
+      console.log("in login")
+      console.log(user)
+      return <Redirect to="/home" />}
     return(
         <div>
       <Form
