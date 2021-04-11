@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react'
-import {withRouter} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import firebase from '../fbConfig'
 
 
@@ -7,9 +7,14 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
     const [user, setUser] = useState(null)
+    const history = useHistory()
     console.log(user)
+    console.log("in context")
     useEffect(()=>{
         firebase.auth().onAuthStateChanged(user=>{
+            console.log("in auth changed")
+            console.log(user)
+            setUser(user)
             if(user) {
               console.log(user)
               setUser(user)
@@ -18,7 +23,7 @@ export const UserContextProvider = ({children}) => {
                 history.push('/login')
             }
           })
-    })
+    },[])
 
 
 
@@ -32,5 +37,5 @@ export const UserContextProvider = ({children}) => {
     )
 }
 
-export default withRouter(UserContextProvider)
+
 
