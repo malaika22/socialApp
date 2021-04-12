@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
 import "antd/dist/antd.css";
 import {UserContextProvider} from './contexts/UserContext'
+import {PostsContextProvider} from './contexts/PostsContext'
 import './index.css';
 import App from './App';
 import firebase from './fbConfig'
@@ -14,7 +15,9 @@ firebase.auth().onAuthStateChanged(user =>{
       <React.StrictMode>
         <BrowserRouter>
           <UserContextProvider>
-            <App />
+            <PostsContextProvider>
+              <App />
+            </PostsContextProvider>
           </UserContextProvider>
         </BrowserRouter>
 
@@ -27,7 +30,9 @@ firebase.auth().onAuthStateChanged(user =>{
       <React.StrictMode>
         <BrowserRouter>
           <UserContextProvider>
-            <App />
+            <PostsContextProvider>
+              <App />
+            </PostsContextProvider>
           </UserContextProvider>
         </BrowserRouter>
 
