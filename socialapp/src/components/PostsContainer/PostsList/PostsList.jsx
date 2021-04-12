@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Post from '../Post/Post'
+import { PostsContext } from '../../../contexts/PostsContext'
 import './styles.scss'
 
-const Post = () => {
+const PostList = () => {
+    const {posts} = useContext(PostsContext)
+    console.log(posts)
     return (
         <div>
-            PostLists
+            {posts.map(post => <Post postDesc ={post}/>)}
         </div>
     )
 }
 
-export default Post
+export default PostList
