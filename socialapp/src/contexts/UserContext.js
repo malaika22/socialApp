@@ -6,23 +6,40 @@ import firebase from '../fbConfig'
 export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
-    const [user, setUser] = useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
     const history = useHistory()
-    console.log(user)
+    const db = firebase.firestore()
+    console.log(currentUser)
     console.log("in context")
+
+
+    const getCurrentUserData = (user) =>{
+        db.collection("users").onSnapshot(snapshot =>{
+            snapshot.forEach(doc=>{
+                console.log(doc.data().uid)
+                console.log(user.uid)
+                if(doc.data().uid === user.uid){
+                    setCurrentUser(doc.data())
+                }
+            })
+        })
+    }
+
     useEffect(()=>{
         firebase.auth().onAuthStateChanged(user=>{
             console.log("in auth changed")
             console.log(user)
-            setUser(user)
             if(user) {
               console.log(user)
-              setUser(user)
+              getCurrentUserData(user)
+              console.log(currentUser)
             }  else {
                 // eslint-disable-next-line no-restricted-globals
                 history.push('/login')
             }
           })
+
+          firebase.firestore()
     },[])
 
 
@@ -30,7 +47,7 @@ export const UserContextProvider = ({children}) => {
     return(
         <UserContext.Provider
         value={{
-            user: user
+            currentUser: currentUser
         }}>
             {children}
         </UserContext.Provider>
