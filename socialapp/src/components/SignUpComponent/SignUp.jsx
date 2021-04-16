@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react'
 import firebase from '../../fbConfig'
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import {Form, Input, Button, DatePicker, Select} from 'antd'
-import {useHistory} from 'react-router-dom'
-import UserContext from '../../contexts/UserContext'
+import {Redirect, useHistory} from 'react-router-dom'
+import {UserContext} from '../../contexts/UserContext'
 import './styles.scss'
 
 const SignUp = () =>{
@@ -18,7 +18,8 @@ const SignUp = () =>{
         confirmPassword: ''
     })
     const {Option} = Select;
-   const {TextArea} = Input
+   const {TextArea} = Input;
+   const {currentUser} = useContext(UserContext)
   let history = useHistory() 
     const db = firebase.firestore()
 
@@ -64,12 +65,16 @@ const SignUp = () =>{
               // Add user to database
               console.log(res)
               createUser(res.user)
-              history.push('/home')
+              history.push('/')
 
             }).catch(err=>{
               console.log('Error signing up' , err)
             })
         }
+    }
+    if(currentUser) {
+      console.log("currentUser in signup")
+      return <Redirect to="/" />
     }
     return(
         <div>

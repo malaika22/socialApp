@@ -11,6 +11,7 @@ export const PostsContextProvider = ({children}) =>{
     const [posts, setPosts] = useState([])
     console.log(currentUser)
     useEffect(()=>{
+        console.log('in useEffect PostContext')
         db.collection("posts").onSnapshot(snapshot => {
             const dataArr =[]
             snapshot.forEach(doc => {
@@ -21,7 +22,7 @@ export const PostsContextProvider = ({children}) =>{
             //setPosts([...dataArr])
             sortingPosts(dataArr)
         })
-    }, [])
+    }, [currentUser])
 
     const sortingPosts = (dataArr) =>{
        const sortedPost =  _.sortBy(dataArr, (o)=>{
