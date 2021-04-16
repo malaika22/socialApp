@@ -1,24 +1,18 @@
+import React, { useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { Button } from 'antd'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { UserContext } from '../../contexts/UserContext'
 import firebase from '../../fbConfig'
 import './styles.scss'
 
 
 const NavHeader = () =>{
-
-    const handleLogout = () =>{
-        firebase.auth().signOut()
-        .then(res=>{
-            console.log("Successfully logged in")
-        })
-        .catch(err => {
-            console.log("error logging out" , err)
-        })
-    }
+    const {handleLogout} = useContext(UserContext)
+ 
+    console.log("in nav")
     return (
         <div>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
             <Link to="/chat">Chat</Link>
             <Link to="/quotes">Quotes</Link>
             <Link to="/music">Music</Link>

@@ -9,8 +9,8 @@ import './styles.scss'
 
 const Login = () =>{
   const history = useHistory()
-  const {user} = useContext(UserContext)
-  console.log(user)
+  const {currentUser} = useContext(UserContext)
+  console.log(currentUser)
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -41,7 +41,7 @@ const Login = () =>{
                 console.log('Successfully logged in')
 
                 //Go to the home page
-                history.push('/home')
+                history.push('/')
                 
             }).catch(err=>{
                 console.log('user not present')
@@ -54,11 +54,13 @@ const Login = () =>{
       
     }
 
+    console.log('login')
 
-    if(user) {
+
+    if(currentUser) {
       console.log("in login")
-      console.log(user)
-      return <Redirect to="/home" />}
+      console.log(currentUser)
+      return <Redirect to="/" />}
     return(
         <div>
       <Form
