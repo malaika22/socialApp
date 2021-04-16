@@ -7,6 +7,7 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
+    const [users, setUsers] = useState(null)
     const history = useHistory()
     const db = firebase.firestore()
     console.log(currentUser)
@@ -14,14 +15,29 @@ export const UserContextProvider = ({children}) => {
 
 
     const getCurrentUserData = (user) =>{
+        const dataArr = []
         db.collection("users").onSnapshot(snapshot =>{
             snapshot.forEach(doc=>{
                 console.log(doc.data().uid)
                 console.log(user.uid)
+                 dataArr.push(doc.data())
                 if(doc.data().uid === user.uid){
                     setCurrentUser(doc.data())
                 }
             })
+            setUsers([...dataArr])
+        })
+    }
+
+   const handleLogout = () =>{
+        firebase.auth().signOut()
+        .then(res=>{
+            console.log("Successfully logged in")
+            setCurrentUser(null)
+            history.push('/login')
+        })
+        .catch(err => {
+            console.log("error logging out" , err)
         })
     }
 
@@ -35,7 +51,7 @@ export const UserContextProvider = ({children}) => {
               console.log(currentUser)
             }  else {
                 // eslint-disable-next-line no-restricted-globals
-                history.push('/login')
+                //history.push('/login')
             }
           })
 
@@ -47,7 +63,9 @@ export const UserContextProvider = ({children}) => {
     return(
         <UserContext.Provider
         value={{
-            currentUser: currentUser
+            currentUser: currentUser,
+            handleLogout: handleLogout,
+            users: users
         }}>
             {children}
         </UserContext.Provider>
