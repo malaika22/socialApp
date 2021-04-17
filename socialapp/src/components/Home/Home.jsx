@@ -8,7 +8,7 @@ import './styles.scss'
 const Home = () =>{
     return (
         <div>
-            <NavHeader />
+            {/*<NavHeader />*/}
             <PostContainer />
         </div>
     )
