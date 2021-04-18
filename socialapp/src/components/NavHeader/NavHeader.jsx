@@ -10,7 +10,7 @@ const NavHeader = ({children}) =>{
     const {handleLogout, currentUser} = useContext(UserContext)
  
     console.log("in nav")
-    if(!currentUser) return <Redirect to="/login"/>
+    if(!currentUser) return <div>you're not login click here to login <Link to="/login">here</Link></div>
     return (
         <div>
             <div>

@@ -14,6 +14,7 @@ export const PostsContextProvider = ({children}) =>{
         console.log('in useEffect PostContext')
         db.collection("posts").onSnapshot(snapshot => {
             const dataArr =[]
+            console.log("in posts useEffect")
             snapshot.forEach(doc => {
                 console.log("pushing data to dataArr")
                 dataArr.push(doc.data())

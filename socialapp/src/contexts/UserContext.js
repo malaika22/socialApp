@@ -55,7 +55,7 @@ export const UserContextProvider = ({children}) => {
             }
           })
 
-          firebase.firestore()
+          //firebase.firestore()
     },[])
 
 
