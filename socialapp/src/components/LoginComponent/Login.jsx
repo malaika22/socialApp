@@ -80,7 +80,7 @@ const Login = () =>{
                 <Form
                 name="login-form"
                 onFinish={finishHandler}
-                className="login-form"
+                className="login-form form"
                 >
                   <div className="login-heading">
                         Sign In
@@ -114,7 +114,6 @@ const Login = () =>{
                     />
                   </Form.Item>
                         {credentials.error&& <p>{credentials.error}</p>}
-                        <p>Not registered? Signup <Link to="/signup"><span style={{color: '#f97b47'}}>here</span></Link></p>
                     <Form.Item className="button-label">
                       <Button type="primary" htmlType="submit" key="submit" onClick={finishHandler}
                       className="login-button"
@@ -122,7 +121,9 @@ const Login = () =>{
                         Submit
                       </Button> 
                     </Form.Item>
+                     <p>Not registered? Signup <Link to="/signup"><span>here</span></Link></p>
                   </Form>
+                 
               </div>
 
             </div>
