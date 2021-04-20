@@ -1,0 +1,88 @@
+.signup-main-div{
+    height: 100vh;
+    display: flex;
+    .login-left-screen{
+        background-color:#FCBC65 ;
+        width: 50%;
+        text-align: center;
+        .left-screen-content-div{
+            .left-screen-content{
+                width: 70%;
+                margin: auto;
+                /* margin: auto; */
+                font-size: 31px;
+                line-height: 60px;
+                font-weight: 700;
+                color: white;
+                margin: 20px auto 20px auto;
+            }
+            .left-screen-img{
+                width: 60%;
+                margin: auto;
+                margin: 36px auto 20px auto;
+                img{
+                        width: 100%;
+                }
+            }
+        }
+    }
+    .login-right-screen{
+            width: 50%;
+            display: flex;
+        .login-form{
+                   box-shadow: 0 1px 3px rgba(50,50,93,0.15);
+                   width: 60%;
+                    margin: auto;
+                    /* height: 237px; */
+                    padding: 18px 30px 18px 30px;
+                    text-align: center;
+                    background: #f4f5f7;
+                    border-radius: 10px;
+            .login-heading{
+                        font-size: 29px;
+                        font-weight: 700;
+                        color: #8898aa;
+                        margin-bottom: 13px;
+            }
+            .login-label{
+                margin-top: 15px;
+                height: 55px;
+                margin-bottom: 0px;
+                .ant-form-item-control-input{
+                    padding-bottom: 5px;
+                     .input-field{
+
+                        padding: 9px;
+                        font-size: 15px;
+                        border-radius: 5px;
+                        box-shadow: 0px 1px 3px rgba(50,50,93,0.15);
+                        border: none;
+                        }
+                    }
+               
+                }
+                .button-label{
+                    margin-bottom: 13px;
+                    .login-button{
+                        background: #f97b47;
+                        border: none;
+                        width: 126px;
+                        border-radius: 5px;
+                        height: 43px;
+                }
+            }
+
+             p{
+                font-size: 14px;
+                font-weight: 600;
+                color: #4f4f4f;
+                margin-bottom: 0;
+                span{
+                   color:#f97b47;
+                }
+            }
+        }
+           
+    }
+
+}
