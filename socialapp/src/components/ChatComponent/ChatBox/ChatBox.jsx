@@ -7,14 +7,7 @@ import { UserContext } from '../../../contexts/UserContext'
 
 
 const Message = ({msg}) =>{
-    
-   
-    console.log()
-    const date= new Date()
-    console.log(msg.timeStamp.toDate())
-    console.log(date)
-const check = moment(msg.timeStamp.toDate()).calendar()
-console.log(check)
+    const check = moment(msg.timeStamp.toDate()).calendar()
     return(
         <div>
             <div>
