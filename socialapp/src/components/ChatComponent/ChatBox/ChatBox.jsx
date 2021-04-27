@@ -7,13 +7,21 @@ import { UserContext } from '../../../contexts/UserContext'
 
 
 const Message = ({msg}) =>{
+    
+   
+    console.log()
+    const date= new Date()
+    console.log(msg.timeStamp.toDate())
+    console.log(date)
+const check = moment(msg.timeStamp.toDate()).calendar()
+console.log(check)
     return(
         <div>
             <div>
                 {msg.author} 
             </div>
             <div>{msg.msg}</div>
-            <div>{moment(msg.timeStamp.toDate()).fromNow()}</div>
+            <div>{check}</div>
         </div>
     )
 }
@@ -44,8 +52,7 @@ const ChatBox = () => {
 
 
     return (
-        <Layout >
-            <Content>
+            <>
                 <div>Message box</div>
                 {messages.map(msg => {
                     return <Message msg={msg}/>
@@ -63,8 +70,8 @@ const ChatBox = () => {
                 <Button 
                 onClick={()=>onMsgSend(message)}
                 >Send</Button>
-            </Content>
-        </Layout>
+            </>
+           
     )
 }
 
