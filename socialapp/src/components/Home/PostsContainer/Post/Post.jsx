@@ -5,8 +5,8 @@ import {LikeFilled, LikeOutlined} from '@ant-design/icons'
 import {UserOutlined} from '@ant-design/icons'
 import moment from 'moment'
 import { Link, useParams } from 'react-router-dom'
-import { UserContext } from '../../../contexts/UserContext'
-import { PostsContext } from '../../../contexts/PostsContext'
+import { UserContext } from '../../../../contexts/UserContext'
+import { PostsContext } from '../../../../contexts/PostsContext'
 
 const Post = ({postDesc}) => {
     const {currentUser} = useContext(UserContext)

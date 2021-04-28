@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Post from '../Post/Post'
-import { PostsContext } from '../../../contexts/PostsContext'
+import { PostsContext } from '../../../../contexts/PostsContext'
 import './styles.scss'
 
 const PostList = () => {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Button} from 'antd'
 import PostsList from './PostsList/PostsList'
-import AddPostModal from '../UIModals/AddPostModal/AddPostModal'
+import AddPostModal from '../../UIModals/AddPostModal/AddPostModal'
 import './styles.scss'
 
 
