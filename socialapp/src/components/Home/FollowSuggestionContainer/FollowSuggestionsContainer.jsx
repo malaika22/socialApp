@@ -1,6 +1,7 @@
 import React from 'react'
 import FollowSuggestCard from './FollowSuggestCard/FollowSuggestCard'
 import FollowSuggestionsList from './FollowSuggestionsList/FollowSuggestionsList'
+import './styles.scss'
 
 const FollowSuggestionsContainer = () =>{
     return(
