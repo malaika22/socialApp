@@ -6,7 +6,7 @@ import Home from './components/Home/Home'
 import UserProfile from './components/UserProfile/UserProfile'
 import ChatSection from './components/ChatComponent/ChatSection'
 import './App.css';
-import NavHeader from './components/NavHeader/NavHeader';
+import HomeLayout from './components/HomeLayout/HomeLayout';
 
 
 function App() {
@@ -15,14 +15,14 @@ function App() {
     
       <Switch>
          <Route path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp}/>
-         <NavHeader>
+         <Route exact path="/signup" component={SignUp}/>
+         <HomeLayout>
          <Route exact path="/" component={Home} />
         <Route path="/user/:userId" render={({history, match})=>
          <UserProfile
          userId={match.params.userId}/>} />
          <Route path="/chat" component={ChatSection}/>
-         </NavHeader>
+         </HomeLayout>
 
       </Switch>
 

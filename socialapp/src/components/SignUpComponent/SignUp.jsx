@@ -2,8 +2,9 @@ import React, { useState, useContext } from 'react'
 import firebase from '../../fbConfig'
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import {Form, Input, Button, DatePicker, Select} from 'antd'
-import {Redirect, useHistory} from 'react-router-dom'
+import {Link, Redirect, useHistory} from 'react-router-dom'
 import {UserContext} from '../../contexts/UserContext'
+import signUp from '../../assests/signUp.png'
 import './styles.scss'
 
 const SignUp = () =>{
@@ -77,32 +78,51 @@ const SignUp = () =>{
       return <Redirect to="/" />
     }
     return(
-        <div>
+        <div className="login-main-div signup-main-div">
+         
+            <div className="login-left-screen">
+                <div className="left-screen-content-div">
+                        <div className="left-screen-content">
+                          Your new social media platform with stuff that actually matters
+                        </div>
+                        <div className="left-screen-img">
+                          <img src={signUp} alt="Sign up"/>
+                        </div> 
+                </div>
+            </div>
+
+        <div className="login-right-screen">
             <Form
             name="signUp-form"
             finish={finishHandler}
+            className="login-form form"
             >
+               <div className="login-heading">Sign Up</div>
                 <Form.Item
-                label="Username"
                 rules={[{ required: true, message: 'Please enter your username!' }]}
+                className="login-label signUp-label"
+                name="username"
                 >
                     <Input name="username" 
                     placeholder="Enter your username"
                     type="text"
                     value={signUpUser.username}
                     onChange={changeHandler}
+                    className="input-field signUp-field"
                     />
                 </Form.Item>
 
                 <Form.Item
-                label="Email"
                 rules={[{ required: true, message: 'Please enter your email!' }]}
+                className="login-label signUp-label"
+                name="email"
                 >
                 <Input name="email" 
                     placeholder="Enter your email"
                     type="email"
                     value={signUpUser.email}
                     onChange={changeHandler}
+                    className="input-field signUp-field"
                     />
                 </Form.Item>
                 
@@ -111,8 +131,7 @@ const SignUp = () =>{
               rules={[
                 { required: true, message: "Password can't be an empty field" },
               ]}
-              className="password-field formLabel"
-              label="Password"
+              className="password-field formLabel login-label signUp-label"
             >
               <Input.Password
                 name="password"
@@ -130,8 +149,7 @@ const SignUp = () =>{
               name="confirmPassword"
               dependencies={["password"]}
               hasFeedback
-              label="Confirm password"
-              className="password-field formLabel"
+              className="password-field formLabel login-label"
               rules={[
                 {
                   required: true,
@@ -164,13 +182,20 @@ const SignUp = () =>{
             </Form.Item>
 
           <Form.Item
-          label="Date of Birth">
-            <DatePicker onChange={handleDateChange}/>
+          className="date-label"
+          style={{margin: "15px 0 20px 0",}}>
+            <DatePicker onChange={handleDateChange}
+            className="date-picker"
+            style={{width: "100%"}}/>
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item 
+          className="gender-label">
             <Select
             onChange={handleGenderChange}
+            className="gender-select"
+            placeholder="Female"
+            style={{textAlign:"start"}}
             >
                 <Option value="female">Female</Option>
                 <Option value="male">Male</Option>
@@ -181,22 +206,25 @@ const SignUp = () =>{
 
           </Form.Item>
 
-          <Form.Item>
+          { /*<Form.Item className="">
               <TextArea rows={4} 
               name="bio"
               value={signUpUser.bio}
               onChange={changeHandler}
               />
-          </Form.Item> 
+              </Form.Item> */}
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" key="submit" onClick={finishHandler}>
-              Submit
+          <Form.Item className="button-label" style={{marginBottom: "13px"}}>
+            <Button type="primary" htmlType="submit" key="submit" onClick={finishHandler}
+            className="login-button">
+              Create Account
             </Button>
-          </Form.Item>
+            </Form.Item>
+            <p>Already have an account? <Link to="/login"><span>Sign in</span></Link></p>
+          </Form>
+          
+        </div>
 
-
-            </Form>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
 import "antd/dist/antd.css";
+//import '@fortawesome/fontawesome-free/svgs'
 import {UserContextProvider} from './contexts/UserContext'
 import {PostsContextProvider} from './contexts/PostsContext'
 import './index.css';

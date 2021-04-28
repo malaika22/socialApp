@@ -3,7 +3,7 @@ import {Avatar} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
 import { PostsContext } from '../../contexts/PostsContext';
 import { UserContext } from '../../contexts/UserContext';
-import Post from '../PostsContainer/Post/Post';
+import Post from '../Home/PostsContainer/Post/Post';
 import './styles.scss'
 
 const UserProfile = ({userId}) =>{
