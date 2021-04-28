@@ -6,6 +6,7 @@ export const MessagesContext = createContext()
 
 export const MessagesContextProvider = ({children}) => {
     const db = firebase.firestore()
+    const _ = require('lodash');
     const [messages , setMessages] = useState([])
     const {currentUser} = useContext(UserContext)
 
@@ -18,10 +19,20 @@ export const MessagesContextProvider = ({children}) => {
                     dataArr.push(doc.data())
                 })
 
-                setMessages(dataArr)
+                sortingMessages(dataArr)
             })
             
     },[])
+
+       const sortingMessages = (dataArr) =>{
+           console.log(dataArr)
+       const sortedMessages =  _.sortBy(dataArr, (o)=>{
+           console.log(o)
+            return o.timeStamp.toDate()
+        })
+        //console.log(sortedPost)
+        setMessages([...sortedMessages])
+    }
 
     const handleSubmitMessage = (msg) =>{
         console.log("in send message")

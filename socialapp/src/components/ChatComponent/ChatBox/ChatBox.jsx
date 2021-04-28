@@ -43,6 +43,8 @@ const ChatBox = () => {
 
     }
 
+    console.log(messages)
+
 
     return (
             <>
