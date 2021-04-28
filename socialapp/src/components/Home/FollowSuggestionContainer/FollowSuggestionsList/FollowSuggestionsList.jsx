@@ -5,7 +5,7 @@ import './styles.scss'
 const FollowSuggestionsList = () =>{
     return(
         <div className="follow-list-container">
-            <div>Follow Suggestions</div>
+            <div className="follow-heading">Follow Suggestions</div>
             <div className="follow-card-container">
                 <FollowSuggestCard />
                 <FollowSuggestCard />
