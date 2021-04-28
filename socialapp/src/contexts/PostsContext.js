@@ -6,7 +6,7 @@ import firebase from '../fbConfig'
 export const PostsContext = createContext();
 
 export const PostsContextProvider = ({children}) =>{
-    var _ = require('lodash');
+    const _ = require('lodash');
     const db = firebase.firestore()
     const {currentUser} = useContext(UserContext)
     const [posts, setPosts] = useState([])
