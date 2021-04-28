@@ -6,7 +6,7 @@ import Home from './components/Home/Home'
 import UserProfile from './components/UserProfile/UserProfile'
 import ChatSection from './components/ChatComponent/ChatSection'
 import './App.css';
-import HomeLayout from './components/NavHeader/NavHeader';
+import HomeLayout from './components/HomeLayout/HomeLayout';
 
 
 function App() {

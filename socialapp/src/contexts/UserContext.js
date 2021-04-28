@@ -13,6 +13,22 @@ export const UserContextProvider = ({children}) => {
     console.log(currentUser)
     console.log("in context")
 
+    useEffect(()=>{
+        firebase.auth().onAuthStateChanged(user=>{
+            console.log("in auth changed")
+            console.log(user)
+            if(user) {
+              console.log(user)
+              getCurrentUserData(user)
+              console.log(currentUser)
+            }  else {
+                // eslint-disable-next-line no-restricted-globals
+                //history.push('/login')
+            }
+          })
+
+          //firebase.firestore()
+    },[])
 
     const getCurrentUserData = (user) =>{
         const dataArr = []
@@ -41,22 +57,7 @@ export const UserContextProvider = ({children}) => {
         })
     }
 
-    useEffect(()=>{
-        firebase.auth().onAuthStateChanged(user=>{
-            console.log("in auth changed")
-            console.log(user)
-            if(user) {
-              console.log(user)
-              getCurrentUserData(user)
-              console.log(currentUser)
-            }  else {
-                // eslint-disable-next-line no-restricted-globals
-                //history.push('/login')
-            }
-          })
 
-          //firebase.firestore()
-    },[])
 
 
 

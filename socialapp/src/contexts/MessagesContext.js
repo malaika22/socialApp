@@ -12,13 +12,14 @@ export const MessagesContextProvider = ({children}) => {
 
 
     useEffect(()=>{
+        console.log("in message use effect")
             db.collection("messages").onSnapshot(snapshot =>{
                 const dataArr = [];
                 console.log("in message useEffect")
                 snapshot.forEach(doc =>{
                     dataArr.push(doc.data())
                 })
-
+                console.log(dataArr)
                 sortingMessages(dataArr)
             })
             
