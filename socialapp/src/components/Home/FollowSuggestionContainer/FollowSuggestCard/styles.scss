@@ -1,0 +1,36 @@
+.follow-card-main-div{
+    border-bottom: 1px solid #c8c8c8;
+    margin-bottom: 10px;
+    .follow-card-content-div{
+            display: flex;
+            /* padding: 20px; */
+            padding-top: 10px;
+            padding-bottom: 20px;
+        .avatar-div{
+            margin-right: 16px;
+            .follow-avatar{
+               
+            }
+        }
+        .user-content{
+                margin-right: 14px;
+            .user-name{
+                    font-weight: 700;
+                    color: #574052;
+                    /* margin-bottom: 1px; */
+                    font-size: 14px;
+
+            }
+            .user-bio{
+
+            }
+        }
+        .follow-button-div{
+            .add-user-icon{
+                color: #f97c50;
+                font-size: 22px;
+                font-weight: 700;
+            }
+        }
+    }
+}
