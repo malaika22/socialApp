@@ -10,7 +10,7 @@ const PostContainer = () =>{
     const [showPostModal, setShowPostModal] = useState(false)
    
     return(
-        <div>
+        <div className="post-main-container">
             <PostsList />
             <Button onClick={()=>setShowPostModal(true)}>Add post</Button>
             {showPostModal && <AddPostModal setShowModal={setShowPostModal}/>}

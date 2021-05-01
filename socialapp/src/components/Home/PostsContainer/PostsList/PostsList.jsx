@@ -6,7 +6,7 @@ import './styles.scss'
 const PostList = () => {
     const {posts} = useContext(PostsContext)   
     return (
-        <div>
+        <div className="post-list-container">
             {posts.map(post => <Post postDesc ={post} />)}
         </div>
     )
