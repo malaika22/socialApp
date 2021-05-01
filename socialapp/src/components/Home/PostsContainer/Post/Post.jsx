@@ -1,12 +1,13 @@
 import React, { useContext, useState, createElement, useEffect, useRef } from 'react'
 import './styles.scss'
-import {Avatar} from 'antd'
-import {LikeFilled, LikeOutlined} from '@ant-design/icons'
+import {Avatar, Input} from 'antd'
+import {FireOutlined, FireFilled, SendOutlined} from '@ant-design/icons'
 import {UserOutlined} from '@ant-design/icons'
 import moment from 'moment'
 import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../../../../contexts/UserContext'
 import { PostsContext } from '../../../../contexts/PostsContext'
+
 
 const Post = ({postDesc}) => {
     const {currentUser} = useContext(UserContext)
@@ -14,7 +15,24 @@ const Post = ({postDesc}) => {
     const {userId} = useParams()
  
     console.log(posts)
-
+    const {TextArea} = Input
+    const likeDisplay = () =>{
+        if(postDesc.liked) {
+            return (
+                <>
+                <FireFilled style={{color: "#F97C50" , fontSize : "16px", cursor: "pointer"}}/>
+               
+            </>
+            )
+        } else {
+            return (
+            <>
+                <FireOutlined style={{color: "#F97C50" , fontSize: "16px", cursor: "pointer"}} />
+                
+            </>
+            )
+        }
+    }
     const changeLike = (postDesc) =>{
         console.log(postDesc.liked)
       const updatedPosts =  posts.map(post => 
@@ -84,19 +102,32 @@ const Post = ({postDesc}) => {
    
  
     return (
-        <div>   
-            <div>
-            <Avatar icon={<UserOutlined/>}/>
-            {userId ?
-                <div>{postDesc.postBy}</div>
-             :
-             <Link to={`/user/${postDesc.authorId}`} >{postDesc.postBy}</Link>
-            }
+        <div className="post-card-main-div">   
+            <div className="post-card-avatar-div">
+            <Avatar icon={<UserOutlined/>} className="user-dp" size={45}/>
+            </div>
+            <div className="post-card-desc-div">
+                {userId ?
+                <div className="post-author-div">{postDesc.postBy}</div>
+                :
+                <div className="post-author-div"> <Link to={`/user/${postDesc.authorId}`} >{postDesc.postBy}</Link> </div>
+                }
+                <div className="post-date-div">{moment(postDesc.createdAt.toDate()).fromNow()}</div>
+                <div className="postDesc-div">{postDesc.post}</div> 
+                <div className="likes-comments-div">
+                    <div className="likes-div">
+                        <span className="likes-type" onClick={()=>changeLike(postDesc)}> {likeDisplay(postDesc)} </span>  <span className="noOfLikes-div"> {postDesc.likes} <span className="sparks-title">  sparks </span>   </span>
+                    </div>
+                    <div className="comments-div">
+                       <TextArea autoSize className="comment-area"> </TextArea> 
+                       <SendOutlined className="send-comment-icon" />
+                        <Avatar icon={<UserOutlined/>} className="comment-avatar" />
+                    </div>
+
+                </div>
+
             </div>
             
-            <div>{postDesc.post}</div> 
-            <span onClick={()=>changeLike(postDesc)}> {createElement(postDesc.liked  ? LikeFilled : LikeOutlined)} </span>  <span> {postDesc.likes}   </span>
-            <span>{moment(postDesc.createdAt.toDate()).fromNow()}</span>
         </div>
     )
 }
