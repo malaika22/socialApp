@@ -2,7 +2,7 @@ import React, { useContext, useState, createElement, useEffect, useRef } from 'r
 import './styles.scss'
 import {Avatar, Input} from 'antd'
 import {FireOutlined, FireFilled, SendOutlined} from '@ant-design/icons'
-import {UserOutlined} from '@ant-design/icons'
+import {UserOutlined, CommentOutlined} from '@ant-design/icons'
 import moment from 'moment'
 import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../../../../contexts/UserContext'
@@ -10,12 +10,15 @@ import { PostsContext } from '../../../../contexts/PostsContext'
 
 
 const Post = ({postDesc}) => {
-    const {currentUser} = useContext(UserContext)
-    const {likePost, dislikePost, updatePost,alreadyLike, posts} = useContext(PostsContext)
+    const {likePost, dislikePost, updatePost, posts, handleAddComment} = useContext(PostsContext)
     const {userId} = useParams()
- 
-    console.log(posts)
+    const [comment, setComment] = useState('')
+    const [showAllComments , setShowAllComments] = useState(false)
+    const commtReference = useRef(postDesc.id)
+    const commtCount = useRef(0)
     const {TextArea} = Input
+   
+   
     const likeDisplay = () =>{
         if(postDesc.liked) {
             return (
@@ -33,10 +36,29 @@ const Post = ({postDesc}) => {
             )
         }
     }
+
+    const handleKeyPress = (e) =>{
+        if(e.key === "Enter") {
+            if(commtReference.current === postDesc.id) {
+                commtCount.current = commtCount.current + 1
+            }
+            handleAddComment(postDesc, comment)
+            e.preventDefault() 
+            setComment("")
+        }
+    }
+
+    const handleShowAllComments = () =>{
+            setShowAllComments(true)
+            commtCount.current = 0
+    }
+    
+
     const changeLike = (postDesc) =>{
         console.log(postDesc.liked)
       const updatedPosts =  posts.map(post => 
 
+    
         /* 
         Like Functionality firebase
 
@@ -99,6 +121,8 @@ const Post = ({postDesc}) => {
         updatePost(updatedPosts)
     
     }
+
+    
    
  
     return (
@@ -115,13 +139,28 @@ const Post = ({postDesc}) => {
                 <div className="post-date-div">{moment(postDesc.createdAt.toDate()).fromNow()}</div>
                 <div className="postDesc-div">{postDesc.post}</div> 
                 <div className="likes-comments-div">
-                    <div className="likes-div">
-                        <span className="likes-type" onClick={()=>changeLike(postDesc)}> {likeDisplay(postDesc)} </span>  <span className="noOfLikes-div"> {postDesc.likes} <span className="sparks-title">  sparks </span>   </span>
+                    <div className="likes-comments">
+                        <div className="likes-div">
+                            <span className="likes-type" onClick={()=>changeLike(postDesc)}> {likeDisplay(postDesc)} </span>  <span className="noOfLikes-div"> {postDesc.likes} <span className="sparks-title">  sparks </span>  </span>
+                        </div>
+                        <div className="comments-div">
+                            <span className="comments-icon" > <CommentOutlined onClick={handleShowAllComments}/>  </span>  <span className="comments-div"> {postDesc.comments.length} <span className="comments-title">  comments </span>  </span>
+                        </div>
+                        
                     </div>
-                    <div className="comments-div">
-                       <TextArea autoSize className="comment-area"> </TextArea> 
-                       <SendOutlined className="send-comment-icon" />
+                    <div className="comments-area">
+                        { showAllComments ? postDesc.comments.map(commnt =>  
+                            (
+                                <div>{commnt.comment} </div>
+                            )
+                        )  : <></> }
+                           
+                        {/* Clean this code through a function */}
+                        <div>{commtCount.current && postDesc.comment!== [] ? postDesc.comments.slice(postDesc.comments.length - commtCount.current).map(comnt => <div>{comnt.comment}</div>) : ""}</div>
+                       <TextArea autoSize className="comment-area" name="commentArea" value={comment} onChange={(e)=> setComment(e.target.value)}  onKeyPress={handleKeyPress}> </TextArea> 
+                       <SendOutlined className="send-comment-icon" onClick={()=>handleAddComment(postDesc, comment)}/>
                         <Avatar icon={<UserOutlined/>} className="comment-avatar" />
+                        
                     </div>
 
                 </div>
