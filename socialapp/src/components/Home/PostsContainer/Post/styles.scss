@@ -35,20 +35,26 @@
         }
         .likes-comments-div{
             padding: 5px 0 5px 0;
-            .likes-div{
+            .likes-comments{
                 margin-right: 5px;
-                .likes-type{
-                    margin-right: 5px;
-                }
-                .noOfLikes-div{
-                    font-size: 14px;
-                    color:#828282 ;
-                    .sparks-title{
-                        margin-left: 5px;
+                .likes-div{
+                    .likes-type{
+                        margin-right: 5px;
+                    }
+                    .noOfLikes-div{
+                        font-size: 14px;
+                        color:#828282 ;
+                        .sparks-title{
+                            margin-left: 5px;
+                        }
                     }
                 }
+                .comments-div{
+                    
+                }
+
             }
-            .comments-div{
+            .comments-area{
                 margin: 11px 0 5px 0;
                 position: relative;
                 .comment-avatar{
