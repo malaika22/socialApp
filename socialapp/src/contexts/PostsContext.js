@@ -10,22 +10,17 @@ export const PostsContextProvider = ({children}) =>{
     const db = firebase.firestore()
     const {currentUser} = useContext(UserContext)
     const [posts, setPosts] = useState([])
-    const alreadyLike = useRef(false)
-    //console.log(currentUser)
+   
     useEffect(()=>{
         console.log('in useEffect PostContext')
         db.collection("posts").onSnapshot(snapshot => {
             const dataArr =[]
-            //console.log("in posts useEffect")
             snapshot.forEach(doc => {
-                //console.log("pushing data to dataArr")
                 dataArr.push(doc.data())
             })
-            //console.log("set posts")
-            //setPosts([...dataArr])
             sortingPosts(dataArr)
         })
-    }, [currentUser])
+    }, [])
 
     const sortingPosts = (dataArr) =>{
        const sortedPost =  _.sortBy(dataArr, (o)=>{
@@ -40,13 +35,6 @@ export const PostsContextProvider = ({children}) =>{
     }
 
     const createPost = (post) =>{
-            /*db.collection("projects").add({
-                ...post,
-                authorId: currentUser.uid,
-                postBy: currentUser.username,
-                createdAt: new Date(),
-                likes: 0
-            }) */
             console.log(post)
             console.log("in create post")
             const postDocRef = db.collection("posts").doc()
@@ -56,76 +44,13 @@ export const PostsContextProvider = ({children}) =>{
                 postBy: currentUser.username,
                 createdAt: new Date(),
                 likes: 0,
+                comments: [],
                 id: postDocRef.id
             })
 
             
 
     }
-
-    const handleAddLike = (selectedPostId, selectedOption) =>{
-        const postLikeRef = db.collection("posts").doc(selectedPostId)
-        if(alreadyLike.current===true && selectedOption==='like'){
-            postLikeRef.update({
-                        likes : firebase.firestore.FieldValue.increment(-1)
-                    })
-        } else if(alreadyLike.current=== true  )
-            if(alreadyLike.current===true && selectedOption==='like' ) {
-               postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-            } else if (alreadyLike.current===true && selectedOption==='dislike'){
-                   postLikeRef.update({
-                        likes : firebase.firestore.FieldValue.increment(-1)
-                    })
-            }
-             else if(alreadyLike.current===false && selectedOption==='dislike') {
-                postLikeRef.update({
-                        likes : firebase.firestore.FieldValue.increment(-1)
-                    })
-            }
-            
-
-    }
-
-    const finalHandleLike = (selectedPostId, selectedOption) =>{
-         const postLikeRef = db.collection("posts").doc(selectedPostId)
-         console.log('in final handle')
-         console.log(alreadyLike.current)
-         console.log(selectedOption)
-            if(alreadyLike.current===false && selectedOption==='like') {
-                console.log('already like false ')
-                postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-                alreadyLike.current=true
-            }
-            else if(alreadyLike.current===true && selectedOption==='dislike' ) {
-                  postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(-1)
-                })
-                alreadyLike.current=false
-            } else if(alreadyLike.current===false && selectedOption==='dislike') {
-                 postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(-1)
-                }) 
-                alreadyLike.current=true
-            } else if(alreadyLike.current===true && selectedOption==='like') {
-                  postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-                alreadyLike.current=false
-            }
-           /* else if(alreadyLike.current===false && selectedOption==='dislike') {
-                  postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(-1)
-                })
-            } */ /*else if(alreadyLike.current===true && selectedOption==='like') {
-                postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                }) */
-                //alreadyLike.current=false
-            }
     
     const likePost = (selectedPostId) =>{
             const postLikeRef = db.collection("posts").doc(selectedPostId);
@@ -141,63 +66,19 @@ export const PostsContextProvider = ({children}) =>{
                     })
     }
 
-
-
-    const addLike = (selectedPostId , selectedOption) =>{
-        console.log(selectedPostId)
-        const postLikeRef = db.collection("posts").doc(selectedPostId)
-        if(selectedOption==='like') {
-            postLikeRef.update({
-                        likes: firebase.firestore.FieldValue.increment(-1)
-                    })
-                alreadyLike.current=true
-        }
-        else {
-                 postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-                alreadyLike.current=false
-        } 
-        console.log(selectedOption)
-        
-            /*if(selectedOption==='like') {
-                console.log('in increment', alreadyLike.current)
-                postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-                alreadyLike.current=true
-                return
-            } else if(selectedOption === 'dislike') {
-                console.log('in decrement', alreadyLike.current)
-                    postLikeRef.update({
-                        likes: firebase.firestore.FieldValue.increment(-1)
-                    })
-                    alreadyLike.current=false
-                    return
-            }  */
-
-            /*if(selectedOption==='like'){
-                 postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-            } else if(selectedOption==='dislike'){
-                postLikeRef.update({
-                        likes: firebase.firestore.FieldValue.increment(-1)
-                    })
-            } */
-            /*else if(selectedOption==='like'){
-               postLikeRef.update({
-                    likes : firebase.firestore.FieldValue.increment(1)
-                })
-                alreadyLike.current=true
-            } else if(selectedOption === 'dislike'){
-                     postLikeRef.update({
-                        likes: firebase.firestore.FieldValue.increment(-1)
-                    })
-                    alreadyLike.current=false
-            } */
-
+    // Adding Comments to Posts 
+    const addComment= (selectedPost, comment) => {
+        db.collection("posts").doc(selectedPost.id).update({
+            comments: firebase.firestore.FieldValue.arrayUnion({
+                commentAuthor : selectedPost.postBy,
+                postId: selectedPost.id,
+                comment: comment ,
+                commentAt : new Date(),
+                authorId : selectedPost.authorId
+            })
+        })
     }
+
 
 
 
@@ -206,11 +87,10 @@ export const PostsContextProvider = ({children}) =>{
         value={{
             createPost: createPost,
             posts: posts,
-            addLike: finalHandleLike,
-            alreadyLike: alreadyLike,
             likePost : likePost,
             dislikePost : dislikePost,
-            updatePost:updatePost
+            updatePost:updatePost,
+            handleAddComment : addComment
         }}>
             {children}
         </PostsContext.Provider>
