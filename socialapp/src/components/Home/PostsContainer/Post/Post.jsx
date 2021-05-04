@@ -9,6 +9,25 @@ import { UserContext } from '../../../../contexts/UserContext'
 import { PostsContext } from '../../../../contexts/PostsContext'
 
 
+const Comment = ({comment}) =>{
+    return(
+        <div className="comments-main-container">
+            <Avatar icon={<UserOutlined />} className="display-comment-avatar"/>
+            <div className="show-comment-div">
+                <div className="comment-author">
+                    {comment.commentAuthor}
+                </div>
+                <div className="comment">
+                    {comment.comment}
+                </div>
+                <div className="comment-time">
+                    {moment(comment.commentAt.toDate()).fromNow()}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 const Post = ({postDesc}) => {
     const {likePost, dislikePost, updatePost, posts, handleAddComment} = useContext(PostsContext)
     const {userId} = useParams()
@@ -17,6 +36,13 @@ const Post = ({postDesc}) => {
     const commtCount = useRef(0)
     const {TextArea} = Input
    
+    const renderRecentComments = () =>{
+      const recentCommntsLength =    postDesc.comments.slice(postDesc.comments.length - commtCount.current)
+     // console.log(recentCommntsLength)
+     return recentCommntsLength.map(commnt =>  <Comment comment={commnt}/>)
+        //return <Comment comment={recentCommntsLength[0]}/>
+    }
+
     const likeDisplay = () =>{
         if(postDesc.liked) {
             return (
@@ -119,7 +145,7 @@ const Post = ({postDesc}) => {
     }
 
     
-   
+   console.log(renderRecentComments())
  
     return (
         <div className="post-card-main-div">   
@@ -145,17 +171,20 @@ const Post = ({postDesc}) => {
                         
                     </div>
                     <div className="comments-area">
-                        { showAllComments ? postDesc.comments.map(commnt =>  
-                            (
-                                <div>{commnt.comment} </div>
-                            )
-                        )  : <></> }
+
                            
                         {/* Clean this code through a function */}
-                        <div>{commtCount.current && postDesc.comment!== [] ? postDesc.comments.slice(postDesc.comments.length - commtCount.current).map(comnt => <div>{comnt.comment}</div>) : ""}</div>
                        <TextArea autoSize className="comment-area" name="commentArea" value={comment} onChange={(e)=> setComment(e.target.value)}  onKeyPress={handleKeyPress}> </TextArea> 
                        <SendOutlined className="send-comment-icon" onClick={()=>handleAddComment(postDesc, comment)}/>
-                        <Avatar icon={<UserOutlined/>} className="comment-avatar" />
+                       <Avatar icon={<UserOutlined/>} className="comment-avatar" />
+                        <div className="recent-comments-main-container">{showAllComments ? 
+                                   postDesc.comments.map(commnt =>  
+                            (
+                                <Comment comment={commnt}/>
+                            )
+                        )  :
+
+                        commtCount.current>0 && postDesc.comment!== [] && renderRecentComments()}</div>
                         
                     </div>
 
