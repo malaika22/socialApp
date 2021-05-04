@@ -84,6 +84,36 @@
                         padding-top: 13px;
                         color:#F97C50 ;
                 }
+
+                .recent-comments-main-container{
+                        .comments-main-container{
+                            display: flex;
+                            width: 100%;
+                            margin: 15px 0;
+                            .display-comment-avatar{
+                                margin-right: 11px;
+                            }
+                            .show-comment-div{
+                                width: 100%;
+                                padding: 20px;
+                                background: #f2f2f2;
+                                padding: 10px 20px 10px 20px;
+                                border-radius: 20px;
+                                .comment-author{
+                                        color: #333;
+                                        font-weight: 700;
+                                }
+                                .comment{
+                                        line-height: 16px;
+                                        padding: 5px 0px;
+                                        font-size: 12px;
+                                }
+                                .comment-time{
+                                        font-size: 10px;
+                                }
+                            }
+                        }
+                }
             }
 
         }
