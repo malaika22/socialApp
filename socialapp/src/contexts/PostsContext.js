@@ -18,17 +18,18 @@ export const PostsContextProvider = ({children}) =>{
             snapshot.forEach(doc => {
                 dataArr.push(doc.data())
             })
-            sortingPosts(dataArr)
+            console.log("after snapshot", dataArr)
+            setPosts(dataArr)
         })
     }, [])
 
-    const sortingPosts = (dataArr) =>{
-       const sortedPost =  _.sortBy(dataArr, (o)=>{
-            return o.createdAt.toDate()
-        }).reverse()
+    //const sortingPosts = (dataArr) =>{
+      // const sortedPost =  _.sortBy(dataArr, (o)=>{
+        //    return o.createdAt.toDate()
+        //}).reverse()
         //console.log(sortedPost)
-        setPosts([...sortedPost])
-    }
+        //setPosts([...sortedPost])
+    //}
 
     const updatePost = (updatedPost) => {
         setPosts(updatedPost)
@@ -90,7 +91,8 @@ export const PostsContextProvider = ({children}) =>{
             likePost : likePost,
             dislikePost : dislikePost,
             updatePost:updatePost,
-            handleAddComment : addComment
+            handleAddComment : addComment,
+            //sortingPosts : sortingPosts
         }}>
             {children}
         </PostsContext.Provider>
