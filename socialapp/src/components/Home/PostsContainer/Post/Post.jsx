@@ -14,10 +14,8 @@ const Post = ({postDesc}) => {
     const {userId} = useParams()
     const [comment, setComment] = useState('')
     const [showAllComments , setShowAllComments] = useState(false)
-    const commtReference = useRef(postDesc.id)
     const commtCount = useRef(0)
     const {TextArea} = Input
-   
    
     const likeDisplay = () =>{
         if(postDesc.liked) {
@@ -39,9 +37,7 @@ const Post = ({postDesc}) => {
 
     const handleKeyPress = (e) =>{
         if(e.key === "Enter") {
-            if(commtReference.current === postDesc.id) {
                 commtCount.current = commtCount.current + 1
-            }
             handleAddComment(postDesc, comment)
             e.preventDefault() 
             setComment("")
@@ -49,7 +45,7 @@ const Post = ({postDesc}) => {
     }
 
     const handleShowAllComments = () =>{
-            setShowAllComments(true)
+            setShowAllComments(!showAllComments)
             commtCount.current = 0
     }
     
