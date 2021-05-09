@@ -27,13 +27,16 @@ const SignUp = () =>{
       const createUser = (res) =>{
         console.log(res)
         console.log(res.uid)
-          db.collection('users').add({
+        const userDocRef = db.collection("users").doc()
+          userDocRef.set({
             uid: res.uid,
             username: signUpUser.username,
             email: signUpUser.email,
             bio: signUpUser.bio,
             dateOfBirth: signUpUser.dateOfBirth,
-            gender: signUpUser.gender
+            gender: signUpUser.gender,
+            userDocId : userDocRef.id,
+            followers: []
           })
       }
 
