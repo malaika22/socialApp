@@ -97,11 +97,11 @@ export const PostsContextProvider = ({children}) =>{
         console.log("adding commnt")
         db.collection("posts").doc(selectedPost.id).update({
             comments: firebase.firestore.FieldValue.arrayUnion({
-                commentAuthor : selectedPost.postBy,
+                commentAuthor : currentUser.username,
                 postId: selectedPost.id,
                 comment: comment ,
                 commentAt : new Date(),
-                authorId : selectedPost.authorId
+                authorId : currentUser.uid
             })
         })
     }
