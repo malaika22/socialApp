@@ -36,8 +36,11 @@
         .likes-comments-div{
             padding: 5px 0 5px 0;
             .likes-comments{
+                display: flex;
+                font-size: 14px;
                 margin-right: 5px;
                 .likes-div{
+                    margin-right: 20px;
                     .likes-type{
                         margin-right: 5px;
                     }
@@ -50,7 +53,7 @@
                     }
                 }
                 .comments-div{
-                    
+                    color: #828282;
                 }
 
             }
