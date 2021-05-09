@@ -35,13 +35,13 @@ const Post = ({postDesc}) => {
     const [showAllComments , setShowAllComments] = useState(false)
     const commtCount = useRef(0)
     const {TextArea} = Input
-   
+
+    
     const renderRecentComments = () =>{
       const recentCommntsLength =    postDesc.comments.slice(postDesc.comments.length - commtCount.current)
-     // console.log(recentCommntsLength)
      return recentCommntsLength.map(commnt =>  <Comment comment={commnt}/>)
-        //return <Comment comment={recentCommntsLength[0]}/>
     }
+
 
     const likeDisplay = () =>{
         if(postDesc.liked) {
@@ -63,7 +63,7 @@ const Post = ({postDesc}) => {
 
     const handleKeyPress = (e) =>{
         if(e.key === "Enter") {
-                commtCount.current = commtCount.current + 1
+            commtCount.current = commtCount.current + 1
             handleAddComment(postDesc, comment)
             e.preventDefault() 
             setComment("")
@@ -77,7 +77,6 @@ const Post = ({postDesc}) => {
     
 
     const changeLike = (postDesc) =>{
-        console.log(postDesc.liked)
       const updatedPosts =  posts.map(post => 
 
     
@@ -144,8 +143,6 @@ const Post = ({postDesc}) => {
     
     }
 
-    
-   console.log(renderRecentComments())
  
     return (
         <div className="post-card-main-div">   
@@ -175,7 +172,7 @@ const Post = ({postDesc}) => {
                            
                         {/* Clean this code through a function */}
                        <TextArea autoSize className="comment-area" name="commentArea" value={comment} onChange={(e)=> setComment(e.target.value)}  onKeyPress={handleKeyPress}> </TextArea> 
-                       <SendOutlined className="send-comment-icon" onClick={()=>handleAddComment(postDesc, comment)}/>
+                       <SendOutlined className="send-comment-icon" onClick={()=>handleAddComment(postDesc, comment, commtCount)}/>
                        <Avatar icon={<UserOutlined/>} className="comment-avatar" />
                         <div className="recent-comments-main-container">{showAllComments ? 
                                    postDesc.comments.map(commnt =>  
