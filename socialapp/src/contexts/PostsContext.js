@@ -1,16 +1,17 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import {UserContext} from './UserContext'
 import firebase from '../fbConfig'
-//import { update } from 'lodash';
+
 
 export const PostsContext = createContext();
 
 export const PostsContextProvider = ({children}) =>{
     const _ = require('lodash');
     const db = firebase.firestore()
-    const {currentUser} = useContext(UserContext)
+    const {currentUser, followers} = useContext(UserContext)
     const [posts, setPosts] = useState([])
-   
+   // const [commnt ,setCommnt] = useState(true)
+   //console.log(commnt)
     useEffect(()=>{
         console.log('in useEffect PostContext')
         db.collection("posts").onSnapshot(snapshot => {
@@ -18,10 +19,9 @@ export const PostsContextProvider = ({children}) =>{
             snapshot.forEach(doc => {
                 dataArr.push(doc.data())
             })
-            console.log("after snapshot", dataArr)
             setPosts(dataArr)
         })
-    }, [])
+    }, [currentUser])
 
     //const sortingPosts = (dataArr) =>{
       // const sortedPost =  _.sortBy(dataArr, (o)=>{
@@ -31,16 +31,44 @@ export const PostsContextProvider = ({children}) =>{
         //setPosts([...sortedPost])
     //}
 
+     /*  const gettingFollowersPost = (posts, followers) =>{
+        const followerPostCheck = [];
+         ((currentUser || {}).followers || []).map(follower => {
+             console.log(follower);
+            for(let i in posts) {
+                if(follower === posts[i].authorId){
+                    followerPostCheck.push(posts[i])
+                }
+            }
+        })
+
+        for(let i in posts) {
+            if((currentUser || {}).uid === posts[i].authorId){
+                followerPostCheck.push(posts[i])
+            }
+        }
+
+         const sortedPost =  _.sortBy(followerPostCheck, (o)=>{
+            return o.createdAt.toDate()
+        }).reverse()
+        setPosts(sortedPost)
+        //return sortedPost
+    } */
+
     const updatePost = (updatedPost) => {
         setPosts(updatedPost)
+        //setCommnt(true)
     }
 
-    const createPost = (post) =>{
+    const createPost = async (post) =>{
             console.log(post)
             console.log("in create post")
             const postDocRef = db.collection("posts").doc()
-            postDocRef.set({
-                post,
+            console.log(postDocRef)
+            console.log(postDocRef.id)
+            
+             postDocRef.set({
+             post,
                 authorId: currentUser.uid,
                 postBy: currentUser.username,
                 createdAt: new Date(),
@@ -48,9 +76,6 @@ export const PostsContextProvider = ({children}) =>{
                 comments: [],
                 id: postDocRef.id
             })
-
-            
-
     }
     
     const likePost = (selectedPostId) =>{
@@ -68,7 +93,8 @@ export const PostsContextProvider = ({children}) =>{
     }
 
     // Adding Comments to Posts 
-    const addComment= (selectedPost, comment) => {
+    const addComment= (selectedPost, comment, commntCount) => {
+        console.log("adding commnt")
         db.collection("posts").doc(selectedPost.id).update({
             comments: firebase.firestore.FieldValue.arrayUnion({
                 commentAuthor : selectedPost.postBy,
