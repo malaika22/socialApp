@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Post from '../Post/Post'
 import { PostsContext } from '../../../../contexts/PostsContext'
 import './styles.scss'
@@ -7,15 +7,26 @@ import { UserContext } from '../../../../contexts/UserContext';
 const PostList = () => {
     const _ = require('lodash');
     const {posts, sortingPosts} = useContext(PostsContext)  
-    const {currentUser} = useContext(UserContext)
-    console.log((currentUser || {}).followers)
-    //console.log((currentUser.followers || []))
-
+    const {users,currentUser, followers} = useContext(UserContext)
+    const [followersPost, setFollowersPost] = useState(posts)
+    console.log(currentUser)
+console.log(users)
+console.log(posts)
+console.log('followers post', followersPost)
+    useEffect(()=>{
+        gettingFollowersPost()
+    }, [currentUser, posts])
+    
     const gettingFollowersPost = () =>{
-        const followerPostCheck = []
-        const followersPost = ((currentUser || {}).followers || []).map(follower => {
+        console.log("in follow start")
+        const followerPostCheck = [];
+         ( (currentUser || {}).followers || []).map(follower => {
+             console.log('follow check')
+             console.log(follower)
             for(let i in posts) {
+                console.log('post check')
                 if(follower === posts[i].authorId){
+                    console.log('author check')
                     followerPostCheck.push(posts[i])
                 }
                 //return null
@@ -32,13 +43,12 @@ const PostList = () => {
             return o.createdAt.toDate()
         }).reverse()
 
-        return sortedPost
-    }
+         setFollowersPost(sortedPost)
+    } 
 
-    console.log(gettingFollowersPost())
     return (
         <div className="post-list-container">
-            {gettingFollowersPost().map(post => <Post postDesc ={post} />)}
+            {(followersPost || []).map(post => <Post postDesc ={post} />) }
         </div>
     )
 }
