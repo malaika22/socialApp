@@ -7,50 +7,50 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
+    const [followers, setFollowers] = useState(null)
     const [users, setUsers] = useState(null)
     const history = useHistory()
     const db = firebase.firestore()
-    console.log(currentUser)
-    console.log("in context")
 
     useEffect(()=>{
         firebase.auth().onAuthStateChanged(user=>{
             console.log("in auth changed")
-            console.log(user)
             if(user) {
-              console.log(user)
-              getCurrentUserData(user)
-              console.log(currentUser)
+                console.log('in auth user hay')
+                getCurrentUserData(user)
+              
             }  else {
                 // eslint-disable-next-line no-restricted-globals
-                //history.push('/login')
+                history.push('/login')
             }
           })
-
+          console.log(users)
           //firebase.firestore()
     },[])
 
+
     const getCurrentUserData = (user) =>{
-        const dataArr = []
+        console.log('get current start')
         db.collection("users").onSnapshot(snapshot =>{
+             const dataArr = []
             snapshot.forEach(doc=>{
-                console.log(doc.data().uid)
-                console.log(user.uid)
                  dataArr.push(doc.data())
                 if(doc.data().uid === user.uid){
                     setCurrentUser(doc.data())
+                    setFollowers(doc.data().followers)
                 }
             })
             setUsers([...dataArr])
         })
     }
 
+
    const handleLogout = () =>{
         firebase.auth().signOut()
         .then(res=>{
-            console.log("Successfully logged in")
+             history.push('/login')
             setCurrentUser(null)
-            history.push('/login')
+           
         })
         .catch(err => {
             console.log("error logging out" , err)
@@ -58,7 +58,12 @@ export const UserContextProvider = ({children}) => {
     }
 
 
-
+    const addFollower = (docId, followerId) => {
+        console.log(docId)
+        db.collection("users").doc(docId).update({
+            followers : firebase.firestore.FieldValue.arrayUnion(followerId)
+        })
+    }
 
 
     return(
@@ -66,7 +71,10 @@ export const UserContextProvider = ({children}) => {
         value={{
             currentUser: currentUser,
             handleLogout: handleLogout,
-            users: users
+            users: users,
+            followers : followers,
+            addFollower : addFollower,
+            //gettingFollowersUser: gettingFollowersUser
         }}>
             {children}
         </UserContext.Provider>
