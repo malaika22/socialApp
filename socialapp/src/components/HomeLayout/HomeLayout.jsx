@@ -23,9 +23,7 @@ const NavMusicIcon = () =>{
 
 
 const HomeLayout = ({children}) =>{
-    console.log(NavQuoteIcon)
     const {handleLogout, currentUser} = useContext(UserContext)
-    console.log("in nav")
     //if(!currentUser) return <div>you're not login click here to login <Link to="/login">here</Link></div>
     const [current, setCurrent] = useState("home")
     const {Content, Header} = Layout

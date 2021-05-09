@@ -12,23 +12,19 @@ export const MessagesContextProvider = ({children}) => {
 
 
     useEffect(()=>{
-        console.log("in message use effect")
             db.collection("messages").onSnapshot(snapshot =>{
                 const dataArr = [];
-                console.log("in message useEffect")
                 snapshot.forEach(doc =>{
                     dataArr.push(doc.data())
                 })
-                console.log(dataArr)
                 sortingMessages(dataArr)
             })
             
     },[])
 
        const sortingMessages = (dataArr) =>{
-           console.log(dataArr)
        const sortedMessages =  _.sortBy(dataArr, (o)=>{
-           console.log(o)
+           //console.log(o)
             return o.timeStamp.toDate()
         })
         //console.log(sortedPost)
@@ -36,7 +32,6 @@ export const MessagesContextProvider = ({children}) => {
     }
 
     const handleSubmitMessage = (msg) =>{
-        console.log("in send message")
         db.collection("messages").add({
             msg : msg,
             user_id : currentUser.uid,
