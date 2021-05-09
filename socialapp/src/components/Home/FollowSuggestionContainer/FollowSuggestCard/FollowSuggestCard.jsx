@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Avatar} from 'antd'
 import {UserOutlined, UserAddOutlined} from '@ant-design/icons'
 import './styles.scss'
+import { UserContext } from '../../../../contexts/UserContext'
 
-const FollowSuggestCard = () =>{
+const FollowSuggestCard = ({ followUser : {username , bio , uid}}) =>{
+    const {addFollower, currentUser} = useContext(UserContext)
+
+    const handleAddFollower = (userDocId , uid) =>{
+        addFollower(userDocId, uid)
+    }
     return(
         <div className="follow-card-main-div">
             <div className="follow-card-content-div">
@@ -11,10 +17,10 @@ const FollowSuggestCard = () =>{
                     <Avatar size={40} icon={<UserOutlined/>} className="follow-avatar"/>
                 </div>
                 <div className="user-content">
-                    <div className="user-name">Malaika Afridi</div>
-                    <div className="user-bio">Neque porro quisquam est qui dolorem ipsum quia dolor sit ... </div>
+                    <div className="user-name">{username}</div>
+                    <div className="user-bio">{bio}</div>
                 </div>
-                <div className="follow-button-div">
+                <div className="follow-button-div" onClick={()=> handleAddFollower(currentUser.userDocId, uid)}>
                     <UserAddOutlined className="add-user-icon"/>
                 </div>
             </div>
