@@ -73,7 +73,7 @@ const HomeLayout = ({children}) =>{
                 </div> 
                 <Dropdown overlay={dropDownOptions} size={40} overlayClassName="dropDrown-overlay" className="dropDown">
                     <div className="dropDown-div">
-                        Malaika Afridi <span className="arrow-down-icon"><CaretDownOutlined /></span>
+                        {(currentUser || {}).username} <span className="arrow-down-icon"><CaretDownOutlined /></span>
                     </div>
                 </Dropdown>    
             </div>

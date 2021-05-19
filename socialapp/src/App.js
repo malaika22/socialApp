@@ -12,7 +12,6 @@ import HomeLayout from './components/HomeLayout/HomeLayout';
 function App() {
   return (
     <>
-    
       <Switch>
          <Route path="/login" component={Login} />
          <Route exact path="/signup" component={SignUp}/>
@@ -23,9 +22,7 @@ function App() {
          userId={match.params.userId}/>} />
          <Route path="/chat" component={ChatSection}/>
          </HomeLayout>
-
       </Switch>
-
       </>
   );
 }
