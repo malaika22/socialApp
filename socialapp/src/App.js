@@ -7,6 +7,7 @@ import UserProfile from './components/UserProfile/UserProfile'
 import ChatSection from './components/ChatComponent/ChatSection'
 import './App.css';
 import HomeLayout from './components/HomeLayout/HomeLayout';
+import QuotesContainer from './components/QuotesComponent/QuotesContainer';
 
 
 function App() {
@@ -17,11 +18,12 @@ function App() {
          <Route path="/login" component={Login} />
          <Route exact path="/signup" component={SignUp}/>
          <HomeLayout>
-         <Route exact path="/" component={Home} />
-        <Route path="/user/:userId" render={({history, match})=>
-         <UserProfile
-         userId={match.params.userId}/>} />
-         <Route path="/chat" component={ChatSection}/>
+            <Route exact path="/" component={Home} />
+            <Route path="/user/:userId" render={({history, match})=>
+            <UserProfile
+            userId={match.params.userId}/>} />
+            <Route path="/chat" component={ChatSection}/>
+            <Route path="/quotes" component={QuotesContainer} />
          </HomeLayout>
 
       </Switch>
