@@ -21,7 +21,7 @@ export const UserContextProvider = ({children}) => {
               
             }  else {
                 // eslint-disable-next-line no-restricted-globals
-                history.push('/login')
+                //history.push('/login')
             }
           })
           console.log(users)
