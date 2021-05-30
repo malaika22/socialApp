@@ -20,7 +20,6 @@ export const QuotesContextProvider = ({children}) =>{
             const getQuoteData = await axios.get('https://api.quotable.io/quotes?limit=')
             setQuotes(getQuoteData.data.results)
             setLoading(false)
-
         }
         catch(err) {
             console.log('error', err)
@@ -32,10 +31,25 @@ export const QuotesContextProvider = ({children}) =>{
             })
             console.log(getQuotes) */
     }
+
+    const changeShareStatus = (quote) => {
+        const updatedQuotes = quotes.map(qut =>   
+            qut._id === quote._id ?
+            {
+                ...quote,
+                shareStatus: 'shared'
+            } : {
+                ...qut
+            }
+        )
+        setQuotes([...updatedQuotes])
+}
+
         return(
             <QuotesContext.Provider value={{
                 quotes : quotes,
-                loading : loading
+                loading : loading,
+                changeShareStatus: changeShareStatus
             }}>
                 {children}
             </QuotesContext.Provider>
