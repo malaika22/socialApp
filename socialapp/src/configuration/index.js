@@ -1,0 +1,6 @@
+export {default as Home } from '../components/Home/Home.jsx'
+export {default as ChatSection} from '../components/ChatComponent/ChatSection.jsx'
+export {default as Login} from '../components/LoginComponent/Login'
+export { default as QuotesComponent} from '../components/QuotesComponent/QuotesContainer'
+export {default as SignUp} from '../components/SignUpComponent/SignUp'
+export { default as UserProfile} from '../components/UserProfile/UserProfile'
