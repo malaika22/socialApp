@@ -16,7 +16,6 @@ firebase.auth().onAuthStateChanged(user =>{
   if (user) {
     ReactDOM.render(
       <React.StrictMode>
-        <BrowserRouter>
           <UserContextProvider>
             <PostsContextProvider>
               <MessagesContextProvider>
@@ -26,8 +25,6 @@ firebase.auth().onAuthStateChanged(user =>{
               </MessagesContextProvider>
             </PostsContextProvider>
           </UserContextProvider>
-        </BrowserRouter>
-
       </React.StrictMode>,
       document.getElementById('root')
     )
@@ -35,7 +32,6 @@ firebase.auth().onAuthStateChanged(user =>{
   else {
     ReactDOM.render(
       <React.StrictMode>
-        <BrowserRouter>
           <UserContextProvider>
             <PostsContextProvider>
               <MessagesContextProvider>
@@ -43,7 +39,6 @@ firebase.auth().onAuthStateChanged(user =>{
               </MessagesContextProvider>
             </PostsContextProvider>
           </UserContextProvider>
-        </BrowserRouter>
 
       </React.StrictMode>,
       document.getElementById('root')
