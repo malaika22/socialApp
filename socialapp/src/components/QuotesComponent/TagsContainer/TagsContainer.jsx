@@ -1,10 +1,19 @@
+import { filter } from 'lodash'
 import React from 'react'
 
 
-const TagsContainer = () => {
+const TagsContainer = ({tags, handleTagClick}) => {
+  
+   const  renderFilteredQuotes = (tag) =>{
+        handleTagClick(tag)
+}
+
+    console.log('container tag', tags)
     return(
-        <div>
-            Tags container
+        <div className="tags-main-container">
+            {tags.map(tag => {
+                return <div onClick={()=>renderFilteredQuotes(tag)}> {tag.name} </div>
+            })}
         </div>
     )
 }
