@@ -48,7 +48,7 @@ export const UserContextProvider = ({children}) => {
    const handleLogout = () =>{
         firebase.auth().signOut()
         .then(res=>{
-             history.push('/login')
+            history.push('/login')
             setCurrentUser(null)
            
         })
