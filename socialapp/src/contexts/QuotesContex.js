@@ -5,11 +5,13 @@ export const QuotesContext = createContext()
 
 export const QuotesContextProvider = ({children}) =>{
     const {currentUser} = useContext(UserContext)
-    const [quotes, setQuotes] = useState(null)
+    const [quotes, setQuotes] = useState([])
+    const [tags, setTags] = useState([])
     const [loading, setLoading] = useState(true)
 
-    useEffect(()=>{
+    useEffect( ()=>{
             getQuoteData()
+            getTagsData()
     }, [currentUser])
 
     console.log('quotes' , quotes)
@@ -32,24 +34,38 @@ export const QuotesContextProvider = ({children}) =>{
             console.log(getQuotes) */
     }
 
+    const getTagsData = async () =>{
+            axios.get('https://api.quotable.io/tags')
+            .then(res=>{
+                console.log('res data',res.data)
+                const tagsData = res.data.filter(tag=> tag.quoteCount > 10)
+                console.log('tags Data', tagsData)
+                setTags([...tagsData])
+            }).catch(err =>{
+                console.log('error in tags', err)
+            })
+    }
+
     const changeShareStatus = (quote) => {
-        const updatedQuotes = quotes.map(qut =>   
-            qut._id === quote._id ?
-            {
-                ...quote,
-                shareStatus: 'shared'
-            } : {
-                ...qut
-            }
-        )
-        setQuotes([...updatedQuotes])
-}
+            const updatedQuotes = quotes.map(qut =>   
+                qut._id === quote._id ?
+                {
+                    ...quote,
+                    shareStatus: 'shared'
+                } : {
+                    ...qut
+                }
+            )
+            setQuotes([...updatedQuotes])
+    }
+
 
         return(
             <QuotesContext.Provider value={{
                 quotes : quotes,
                 loading : loading,
-                changeShareStatus: changeShareStatus
+                changeShareStatus: changeShareStatus,
+                tags : tags 
             }}>
                 {children}
             </QuotesContext.Provider>
