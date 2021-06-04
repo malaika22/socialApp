@@ -26,9 +26,16 @@ const HomeLayout = ({children}) =>{
     const {handleLogout, currentUser} = useContext(UserContext)
     //if(!currentUser) return <div>you're not login click here to login <Link to="/login">here</Link></div>
     const [current, setCurrent] = useState("home")
+    const history = useHistory()
     const {Content, Header} = Layout
     const handleMenuClick = (e) => {
         setCurrent(e.key)
+    }
+
+    const logoutHandler = () =>{
+        console.log('in lohing out')
+        history.push('/login')
+        handleLogout()
     }
 
     const dropDownOptions = () => {
@@ -37,7 +44,7 @@ const HomeLayout = ({children}) =>{
                 <Menu.Item>
                     <Link to={`/user/${currentUser.uid}`}>My Profile</Link>
                 </Menu.Item>
-                <Menu.Item onClick={handleLogout}>
+                <Menu.Item onClick={logoutHandler}>
                     Logout
                 </Menu.Item>
             </Menu>

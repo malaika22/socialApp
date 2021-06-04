@@ -14,7 +14,6 @@ function App() {
     routes.map((routeProps, index) => {
       return <Route key={index} {...routeProps} />;
     });
-
   const routes = useMemo(()=>{
     console.log('in use memo')
           if(currentUser) {

@@ -48,9 +48,9 @@ export const UserContextProvider = ({children}) => {
    const handleLogout = () =>{
         firebase.auth().signOut()
         .then(res=>{
-            history.push('/login')
+            console.log('in handle logout')
+            //history.push('/login')
             setCurrentUser(null)
-           
         })
         .catch(err => {
             console.log("error logging out" , err)
