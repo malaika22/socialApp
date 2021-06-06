@@ -5,7 +5,7 @@ import './styles.scss'
 import { QuotesContext } from '../../contexts/QuotesContex'
 
 const QuotesContainer = () => {
-    const {quotes, loading, tags} = useContext(QuotesContext)
+    const {quotes, loading, handleTag} = useContext(QuotesContext)
     const [filteredQuotes , setFilteredQuotes] = useState([...quotes])
 
     const handleTagClick = (tag) =>{
@@ -14,20 +14,25 @@ const QuotesContainer = () => {
     }
 
     console.log('quotes in container', quotes)
-    return(
-        <div className="quotes-main-container">
-            <div className="quotes-card-main-container">
-               { loading !== true &&
-                   (filteredQuotes || []).map(quote => {
-                       console.log(quote)
-                   return <QuotesCard quote={quote}/>})
-               } 
+    if(loading) {
+        return<div>Loading......</div>
+    } else {
+        return(
+            <div className="quotes-main-container">
+                <div className="quotes-card-main-container">
+                { loading !== true &&
+                    (quotes || []).map(quote => {
+                        console.log(quote)
+                    return <QuotesCard quote={quote}/>})
+                } 
+                </div>
+                <div className="tags-main-container">
+                    <TagContainer handleTagClick={handleTag}/>
+                </div>
             </div>
-            <div className="tags-main-container">
-                <TagContainer tags={tags} handleTagClick={handleTagClick}/>
-            </div>
-        </div>
-    )
+        )
+    }
+
 }
 
 export default QuotesContainer

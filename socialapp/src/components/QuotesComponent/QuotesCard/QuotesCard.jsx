@@ -10,7 +10,6 @@ const QuotesCard = ({quote}) =>{
        const {createPost} = useContext(PostsContext)
        const {changeShareStatus} = useContext(QuotesContext)
        const [shareAction, setSharedAction] = useState('') 
-       console.log('author', author)
 
        const sharePost = () =>{
            changeShareStatus(quote)
