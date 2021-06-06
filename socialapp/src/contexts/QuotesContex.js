@@ -6,45 +6,56 @@ export const QuotesContext = createContext()
 export const QuotesContextProvider = ({children}) =>{
     const {currentUser} = useContext(UserContext)
     const [quotes, setQuotes] = useState([])
-    const [tags, setTags] = useState([])
+    const [tag, setTag] = useState("")
     const [loading, setLoading] = useState(true)
 
-    useEffect( ()=>{
+    useEffect(()=>{
+        console.log('useEffect tag',tag)
+        setLoading(true)
+        if(tag) {
+          getTagsData(tag)
+        } else {
             getQuoteData()
-            getTagsData()
-    }, [currentUser])
+        }
+
+            tagData()
+    }, [currentUser, tag])
 
     console.log('quotes' , quotes)
 
+    //check again not important
     const getQuoteData = async() =>{
-
         try {
-            const getQuoteData = await axios.get('https://api.quotable.io/quotes?limit=')
+            const getQuoteData = await axios.get('https://api.quotable.io/quotes')
             setQuotes(getQuoteData.data.results)
             setLoading(false)
         }
         catch(err) {
             console.log('error', err)
         }
-           /* const getQuotes = await axios.get('https://api.quotable.io/quotes?limit=').then(res=>{
-                console.log(res.data)
-            }).catch(err =>{
-                console.log('err', err)
-            })
-            console.log(getQuotes) */
     }
 
-    const getTagsData = async () =>{
-            axios.get('https://api.quotable.io/tags')
+    const tagData = async () =>{
+        axios.get('https://api.quotable.io/tags').then(res=>{
+            console.log(res.data)
+        })
+    }
+
+    const getTagsData = async (tag) =>{
+        console.log("outside tag", tag)
+        if(tag) {
+            console.log("in tags data", tag)
+            axios.get(`https://api.quotable.io/quotes?tags=${tag}`)
             .then(res=>{
-                console.log('res data',res.data)
-                const tagsData = res.data.filter(tag=> tag.quoteCount > 10)
-                console.log('tags Data', tagsData)
-                setTags([...tagsData])
+                console.log('in tags result', res.data)
+                setLoading(false)
+                setQuotes([...res.data.results])
+                //setTags([...tagsData])
             }).catch(err =>{
                 console.log('error in tags', err)
             })
     }
+}
 
     const changeShareStatus = (quote) => {
             const updatedQuotes = quotes.map(qut =>   
@@ -65,7 +76,7 @@ export const QuotesContextProvider = ({children}) =>{
                 quotes : quotes,
                 loading : loading,
                 changeShareStatus: changeShareStatus,
-                tags : tags 
+                handleTag: setTag
             }}>
                 {children}
             </QuotesContext.Provider>
