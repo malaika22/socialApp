@@ -2,18 +2,17 @@ import { filter } from 'lodash'
 import React from 'react'
 
 
-const TagsContainer = ({tags, handleTagClick}) => {
-  
-   const  renderFilteredQuotes = (tag) =>{
-        handleTagClick(tag)
-}
+const TagsContainer = ({handleTagClick}) => {
+    const tags = ["friendship", "wisdom", "famous-quotes", "technology", "inspirational", "life"]
 
     console.log('container tag', tags)
+    const clickTagHandle = (tag) =>{
+        console.log("in click tag")
+        handleTagClick(tag)
+    }
     return(
         <div className="tags-main-container">
-            {tags.map(tag => {
-                return <div onClick={()=>renderFilteredQuotes(tag)}> {tag.name} </div>
-            })}
+           {tags.map(tag =>  <div onClick={()=>clickTagHandle(tag)}>{tag}</div>)}
         </div>
     )
 }
