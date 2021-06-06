@@ -45,8 +45,12 @@ export const  RegisterRoutes = [
                 path: "/login",
                 component: Login
               },
-             {
+              {
                 path: "/signup",
                 component: SignUp
-             } 
+              } ,
+              {
+                  path: "*",
+                  component: Login
+              }
 ]

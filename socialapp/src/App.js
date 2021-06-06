@@ -10,10 +10,12 @@ function App() {
   const {currentUser} = useContext(UserContext)
 
   console.log('Hehe', currentUser)
-  const prepareRoutes = (routes) =>
-    routes.map((routeProps, index) => {
-      return <Route key={index} {...routeProps} />;
-    });
+  const prepareRoutes = (routes) => {
+     return routes.map((routeProps, index) => {
+          return <Route key={index} {...routeProps} />;
+        });  
+  }
+  
   const routes = useMemo(()=>{
     console.log('in use memo')
           if(currentUser) {
