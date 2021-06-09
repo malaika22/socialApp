@@ -11,6 +11,7 @@ export const UserContextProvider = ({children}) => {
     const [users, setUsers] = useState(null)
     const history = useHistory()
     const db = firebase.firestore()
+    const [userLoading, setUserLoading] = useState(true)
 
     useEffect(()=>{
         firebase.auth().onAuthStateChanged(user=>{
