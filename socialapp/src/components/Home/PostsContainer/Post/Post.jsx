@@ -29,7 +29,7 @@ const Comment = ({comment}) =>{
 }
 
 const Post = ({postDesc}) => {
-    const {likePost, dislikePost, updatePost, posts, handleAddComment} = useContext(PostsContext)
+    const { updatePost, posts, handleAddComment} = useContext(PostsContext)
     const {userId} = useParams()
     const [comment, setComment] = useState('')
     const [showAllComments , setShowAllComments] = useState(false)
