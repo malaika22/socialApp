@@ -11,6 +11,7 @@ export const UserContextProvider = ({children}) => {
     const [users, setUsers] = useState(null)
     const history = useHistory()
     const db = firebase.firestore()
+    const [userLoading, setUserLoading] = useState(true)
 
     useEffect(()=>{
         firebase.auth().onAuthStateChanged(user=>{
@@ -21,7 +22,7 @@ export const UserContextProvider = ({children}) => {
               
             }  else {
                 // eslint-disable-next-line no-restricted-globals
-                history.push('/login')
+                //history.push('/login')
             }
           })
           console.log(users)
@@ -44,13 +45,19 @@ export const UserContextProvider = ({children}) => {
         })
     }
 
+    const handleBioUpdate = (docId, updatedBio) =>{
+        db.collection("users").doc(docId).update({
+            bio : updatedBio
+        })
+    }   
+
 
    const handleLogout = () =>{
         firebase.auth().signOut()
         .then(res=>{
-             history.push('/login')
+            console.log('in handle logout')
+            //history.push('/login')
             setCurrentUser(null)
-           
         })
         .catch(err => {
             console.log("error logging out" , err)
@@ -74,6 +81,7 @@ export const UserContextProvider = ({children}) => {
             users: users,
             followers : followers,
             addFollower : addFollower,
+            handleBioUpdate : handleBioUpdate
             //gettingFollowersUser: gettingFollowersUser
         }}>
             {children}

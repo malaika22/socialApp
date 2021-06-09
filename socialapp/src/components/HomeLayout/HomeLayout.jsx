@@ -26,18 +26,25 @@ const HomeLayout = ({children}) =>{
     const {handleLogout, currentUser} = useContext(UserContext)
     //if(!currentUser) return <div>you're not login click here to login <Link to="/login">here</Link></div>
     const [current, setCurrent] = useState("home")
+    const history = useHistory()
     const {Content, Header} = Layout
     const handleMenuClick = (e) => {
         setCurrent(e.key)
     }
 
+    const logoutHandler = () =>{
+        console.log('in lohing out')
+        history.push('/login')
+        handleLogout()
+    }
+
     const dropDownOptions = () => {
         return (
-            <Menu>
-                <Menu.Item>
+            <Menu className="profile-dropdown-menu">
+                <Menu.Item className="dropdown-menu-item">
                     <Link to={`/user/${currentUser.uid}`}>My Profile</Link>
                 </Menu.Item>
-                <Menu.Item onClick={handleLogout}>
+                <Menu.Item onClick={logoutHandler} className="dropdown-menu-item">
                     Logout
                 </Menu.Item>
             </Menu>
@@ -71,7 +78,7 @@ const HomeLayout = ({children}) =>{
                 <div className="profile-pic-div">
                     <Avatar icon={<UserOutlined/>} />
                 </div> 
-                <Dropdown overlay={dropDownOptions} size={40} overlayClassName="dropDrown-overlay" className="dropDown">
+                <Dropdown overlay={dropDownOptions} size={40} overlayClassName="dropDrown-overlay" className="dropDown" trigger={["click"]} placement="bottomLeft">
                     <div className="dropDown-div">
                         {(currentUser || {}).username} <span className="arrow-down-icon"><CaretDownOutlined /></span>
                     </div>

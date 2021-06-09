@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import {Avatar} from 'antd'
+import React, { useContext, useEffect, useState } from 'react';
+import {Avatar, Button, Input} from 'antd'
 import Icon ,  {UserOutlined} from '@ant-design/icons'
 import { PostsContext } from '../../contexts/PostsContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -13,13 +13,40 @@ const BirthdayCakeIcon = () =>{
 }
 
 const UserProfile = ({userId}) =>{
-    const {users} = useContext(UserContext)
+    const {users, currentUser, handleBioUpdate} = useContext(UserContext)
     const {posts} = useContext(PostsContext)
     const selectedUser = (users || []).filter(user => user.uid === userId)[0]
-    //const {} = useContext(Posts)
     const userPosts = (posts|| []).filter(post => post.authorId=== userId)
-    console.log(selectedUser)
-    console.log(userPosts)
+    const [updateBio, setUpdateBio] = useState(false)
+    const [updateUserBio, setUpdateUserBio] = useState((selectedUser || {}).bio)
+    const [bioLimit, setBioLimit] = useState("")
+    const { TextArea } = Input
+
+    const updateBioHandler = (e) =>{
+        console.log('e,', e)
+        if(e.key === "Enter"){
+            console.log(e ,"in enter")
+            setUpdateBio(false)
+            //updateUserBio(e.target.value)
+            handleBioUpdate(currentUser.userDocId, updateUserBio)
+        }
+    }
+
+    const handleUpdateButton = () =>{
+        setUpdateBio(!updateBio)
+        if(updateUserBio!== selectedUser.bio) {
+            handleBioUpdate(currentUser.userDocId, updateUserBio)
+        }
+    }
+
+    const handleOnChangeBio = (e) =>{
+        if(e.target.value.length <= 10){
+            setUpdateUserBio(e.target.value)
+            setBioLimit("")
+        } else {
+            setBioLimit("Bio can't be more than 10 words")
+        }
+    }
         return(
             <div className="user-profile-main-div">
                 <div className="user-profile-inner-div">
@@ -28,12 +55,26 @@ const UserProfile = ({userId}) =>{
                         <div className="user-name-div">
                           <span className="user-name"> {(selectedUser || {}).username}  </span> 
                         </div> 
-                        <div className="bio-div">
-                           <span className="user-bio"> {(selectedUser || {}).bio}  </span> 
-                        </div> 
+                        {
+                            selectedUser.uid === currentUser.uid ? 
+                            <div className="bio-div">
+                                {
+                                    updateBio ? [ 
+                                    <TextArea autoSize showCount value={updateUserBio} onChange={handleOnChangeBio} onKeyPress={updateBioHandler} maxLength={10} />
+                                    , bioLimit ? <span>{bioLimit}</span> : <></>
+                                ]
+                                    :  <span className="user-bio"> {(selectedUser || {}).bio}  </span> 
+                                }
+
+                                <Button onClick={handleUpdateButton}>Update bio</Button>
+                            </div> : 
+                            <div className="bio-div">
+                                <span className="user-bio"> {(selectedUser || {}).bio}  </span> 
+                            </div> 
+                        }
+
                         {/* Add a parent div for code optimzation */}
                         <div className="user-general-info">
-
                         
                         <div className="user-birth-div">
                            <Icon component={BirthdayCakeIcon} className="profile-icons"/>  <span className="user-birth">{(selectedUser || {}).dateOfBirth}  </span> 

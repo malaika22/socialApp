@@ -13,11 +13,13 @@ const Login = () =>{
   const history = useHistory()
   const {currentUser} = useContext(UserContext)
   console.log(currentUser)
-    const [credentials, setCredentials] = useState({
+    const [credentials, setCredentials] = useState(
+      {
         email: '',
         password: '',
         error: ''
-    })
+      }
+    )
 
     const changeHandler = (e) =>{
         setCredentials({

@@ -20,7 +20,7 @@ export const MessagesContextProvider = ({children}) => {
                 sortingMessages(dataArr)
             })
             
-    },[])
+    },[currentUser])
 
        const sortingMessages = (dataArr) =>{
        const sortedMessages =  _.sortBy(dataArr, (o)=>{

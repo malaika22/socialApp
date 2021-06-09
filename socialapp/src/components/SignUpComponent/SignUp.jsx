@@ -76,10 +76,6 @@ const SignUp = () =>{
             })
         }
     }
-    if(currentUser) {
-      console.log("currentUser in signup")
-      return <Redirect to="/" />
-    }
     return(
         <div className="login-main-div signup-main-div">
          

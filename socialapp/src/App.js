@@ -1,30 +1,38 @@
-import React from 'react'
-import { Route, Switch } from 'react-router';
-import Login from './components/LoginComponent/Login'
-import SignUp from './components/SignUpComponent/SignUp'
-import Home from './components/Home/Home'
-import UserProfile from './components/UserProfile/UserProfile'
-import ChatSection from './components/ChatComponent/ChatSection'
+import React, { useContext, useEffect, useMemo } from 'react'
+import { Route, Switch, Redirect } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import HomeLayout from './components/HomeLayout/HomeLayout';
+import { HomeRoutes, RegisterRoutes } from './configuration/routes';
+import { UserContext } from './contexts/UserContext';
 
 
 function App() {
-  return (
-    <>
-      <Switch>
-         <Route path="/login" component={Login} />
-         <Route exact path="/signup" component={SignUp}/>
-         <HomeLayout>
-         <Route exact path="/" component={Home} />
-        <Route path="/user/:userId" render={({history, match})=>
-         <UserProfile
-         userId={match.params.userId}/>} />
-         <Route path="/chat" component={ChatSection}/>
-         </HomeLayout>
-      </Switch>
-      </>
-  );
+
+  const {currentUser} = useContext(UserContext)
+
+  console.log('Hehe', currentUser)
+  const prepareRoutes = (routes) => 
+      routes.map((routeProps, index) => {
+          return <Route key={index} {...routeProps} />;
+        });  
+  
+  const routes = useMemo(()=>{
+    console.log('in use memo')
+          if(currentUser) {
+            console.log('in user hai')
+            return prepareRoutes(HomeRoutes)
+          } else {
+            return prepareRoutes(RegisterRoutes)
+          }
+}, [currentUser]) 
+
+console.log('keke', routes)
+
+    return (
+        <Switch>
+          {routes}
+        </Switch>
+    )
 }
 
 export default App;
