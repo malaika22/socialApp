@@ -8,8 +8,6 @@ const FollowSuggestionsList = () =>{
     const [followersList, setFollowersList] = useState(followers)
     
     useEffect(()=>{
-        console.log("in follow effect")
-        console.log(users)
         if(users) {
             gettingFollowersUser()
         }
@@ -18,8 +16,6 @@ const FollowSuggestionsList = () =>{
 
 
     const gettingFollowersUser = () =>{
-        console.log(users)
-        console.log(currentUser)
         const followerUser = (users || []).filter(user => user.uid !== (currentUser || {}).uid) ;
             ((currentUser || {}).followers || []).map(follower => {
              for(let i in followerUser) {

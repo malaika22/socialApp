@@ -25,7 +25,6 @@ const ChatBox = () => {
     const {currentUser} = useContext(UserContext)
     const {messages, handleSubmitMessage} = useContext(MessagesContext)
     const [message , setMessage] = useState('')
-    console.log(messages)
     const handleMsgChange = (e) =>{
         setMessage(e.target.value)
     }

@@ -9,10 +9,7 @@ const PostList = () => {
     const {posts, sortingPosts} = useContext(PostsContext)  
     const {users,currentUser, followers} = useContext(UserContext)
     const [followersPost, setFollowersPost] = useState(posts)
-    console.log(currentUser)
-console.log(users)
-console.log(posts)
-console.log('followers post', followersPost)
+
     useEffect(()=>{
         gettingFollowersPost()
     }, [currentUser, posts])
@@ -21,12 +18,8 @@ console.log('followers post', followersPost)
         console.log("in follow start")
         const followerPostCheck = [];
          ( (currentUser || {}).followers || []).map(follower => {
-             console.log('follow check')
-             console.log(follower)
             for(let i in posts) {
-                console.log('post check')
                 if(follower === posts[i].authorId){
-                    console.log('author check')
                     followerPostCheck.push(posts[i])
                 }
                 //return null
