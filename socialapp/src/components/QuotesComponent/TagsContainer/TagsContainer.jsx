@@ -1,5 +1,5 @@
-import { filter } from 'lodash'
-import React from 'react'
+import React from 'react';
+import './styles.scss';
 
 
 const TagsContainer = ({handleTagClick}) => {
@@ -11,8 +11,12 @@ const TagsContainer = ({handleTagClick}) => {
         handleTagClick(tag)
     }
     return(
-        <div className="tags-main-container">
-           {tags.map(tag =>  <div onClick={()=>clickTagHandle(tag)}>{tag}</div>)}
+        <div className="tags-main-div">
+            <div className="tags-header">Browse by tags</div>
+            <div className="tags-div">
+                {tags.map(tag =>  <div onClick={()=>clickTagHandle(tag)} className="tags">{tag}</div>)}
+            </div>
+ 
         </div>
     )
 }
