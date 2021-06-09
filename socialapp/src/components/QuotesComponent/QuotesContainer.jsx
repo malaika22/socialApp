@@ -8,12 +8,11 @@ import Loading from '../LoadingComponent/Loading/Loading'
 
 const QuotesContainer = () => {
     const {quotes, loading, handleTag} = useContext(QuotesContext)
-    const [filteredQuotes , setFilteredQuotes] = useState([...quotes])
-
-    const handleTagClick = (tag) =>{
+  
+    /*const handleTagClick = (tag) =>{
         const tempQuotes =  quotes.filter(quote => quote.tags.find(tg => tg === tag.name))
         setFilteredQuotes([...tempQuotes])
-    }
+    }*/
 
     console.log('quotes in container', quotes)
     if(loading) {

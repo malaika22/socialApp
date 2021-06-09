@@ -21,6 +21,7 @@ const QuotesCard = ({quote}) =>{
            changeShareStatus(quote)
            createPost(content)
        }
+       
     return(
         <div className="quote-card-container">
                 <div className="quote-content">
