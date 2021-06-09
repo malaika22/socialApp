@@ -10,11 +10,10 @@ function App() {
   const {currentUser} = useContext(UserContext)
 
   console.log('Hehe', currentUser)
-  const prepareRoutes = (routes) => {
-     return routes.map((routeProps, index) => {
+  const prepareRoutes = (routes) => 
+      routes.map((routeProps, index) => {
           return <Route key={index} {...routeProps} />;
         });  
-  }
   
   const routes = useMemo(()=>{
     console.log('in use memo')
@@ -24,7 +23,7 @@ function App() {
           } else {
             return prepareRoutes(RegisterRoutes)
           }
-  }, [currentUser]) 
+}, [currentUser]) 
 
 console.log('keke', routes)
 
