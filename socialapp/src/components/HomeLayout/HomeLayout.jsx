@@ -40,11 +40,11 @@ const HomeLayout = ({children}) =>{
 
     const dropDownOptions = () => {
         return (
-            <Menu>
-                <Menu.Item>
+            <Menu className="profile-dropdown-menu">
+                <Menu.Item className="dropdown-menu-item">
                     <Link to={`/user/${currentUser.uid}`}>My Profile</Link>
                 </Menu.Item>
-                <Menu.Item onClick={logoutHandler}>
+                <Menu.Item onClick={logoutHandler} className="dropdown-menu-item">
                     Logout
                 </Menu.Item>
             </Menu>
@@ -78,7 +78,7 @@ const HomeLayout = ({children}) =>{
                 <div className="profile-pic-div">
                     <Avatar icon={<UserOutlined/>} />
                 </div> 
-                <Dropdown overlay={dropDownOptions} size={40} overlayClassName="dropDrown-overlay" className="dropDown">
+                <Dropdown overlay={dropDownOptions} size={40} overlayClassName="dropDrown-overlay" className="dropDown" trigger={["click"]} placement="bottomLeft">
                     <div className="dropDown-div">
                         Malaika Afridi <span className="arrow-down-icon"><CaretDownOutlined /></span>
                     </div>
