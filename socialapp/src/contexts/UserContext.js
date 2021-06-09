@@ -45,6 +45,12 @@ export const UserContextProvider = ({children}) => {
         })
     }
 
+    const handleBioUpdate = (docId, updatedBio) =>{
+        db.collection("users").doc(docId).update({
+            bio : updatedBio
+        })
+    }   
+
 
    const handleLogout = () =>{
         firebase.auth().signOut()
@@ -75,6 +81,7 @@ export const UserContextProvider = ({children}) => {
             users: users,
             followers : followers,
             addFollower : addFollower,
+            handleBioUpdate : handleBioUpdate
             //gettingFollowersUser: gettingFollowersUser
         }}>
             {children}
