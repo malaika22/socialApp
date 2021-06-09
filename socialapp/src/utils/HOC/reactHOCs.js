@@ -10,7 +10,6 @@ export const withSubroutes = (Component, subroutes) => () => {
           {subroutes.map((routeProps, index) => (
             <Route key={index} {...routeProps} />
           ))}
-         <Route component={()=> <h1>not gound</h1>}/>
         </Switch>
       }
     />
