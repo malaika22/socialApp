@@ -7,6 +7,7 @@ import { UserContext } from './contexts/UserContext';
 
 
 function App() {
+
   const {currentUser} = useContext(UserContext)
 
   console.log('Hehe', currentUser)
@@ -28,13 +29,9 @@ function App() {
 console.log('keke', routes)
 
     return (
-      <BrowserRouter>
         <Switch>
           {routes}
         </Switch>
-      </BrowserRouter>
-
-
     )
 }
 
