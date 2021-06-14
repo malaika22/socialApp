@@ -12,7 +12,7 @@ const SignUp = () =>{
         username: '',
         uid: '',
         email: '',
-        bio: '',
+        bio: 'I love spark',
         gender: '',
         password: '',
         dateOfBirth: '',
@@ -62,7 +62,7 @@ const SignUp = () =>{
     }
     const finishHandler = () =>{
       console.log(signUpUser)
-        if(signUpUser.email && signUpUser.username){
+        if((signUpUser|| {}).email && (signUpUser || {}).username){
             firebase.auth().createUserWithEmailAndPassword(signUpUser.email,signUpUser.password)
             .then(res=>{
               console.log("Successfully signed in")
