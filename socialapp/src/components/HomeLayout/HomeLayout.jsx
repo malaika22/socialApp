@@ -80,7 +80,8 @@ const HomeLayout = ({children}) =>{
                 </div> 
                 <Dropdown overlay={dropDownOptions} size={40} overlayClassName="dropDrown-overlay" className="dropDown" trigger={["click"]} placement="bottomLeft">
                     <div className="dropDown-div">
-                        {currentUser.username} <span className="arrow-down-icon"><CaretDownOutlined /></span>
+
+                        {(currentUser || {}).username} <span className="arrow-down-icon"><CaretDownOutlined /></span>
                     </div>
                 </Dropdown>    
             </div>
