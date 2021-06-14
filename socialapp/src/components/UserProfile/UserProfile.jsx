@@ -40,7 +40,7 @@ const UserProfile = ({userId}) =>{
     }
 
     const handleOnChangeBio = (e) =>{
-        if(e.target.value.length <= 10){
+        if(e.target.value.length <= 50){
             setUpdateUserBio(e.target.value)
             setBioLimit("")
         } else {
@@ -60,7 +60,7 @@ const UserProfile = ({userId}) =>{
                             <div className="bio-div">
                                 {
                                     updateBio ? [ 
-                                    <TextArea autoSize showCount value={updateUserBio} onChange={handleOnChangeBio} onKeyPress={updateBioHandler} maxLength={10} />
+                                    <TextArea autoSize showCount value={updateUserBio} onChange={handleOnChangeBio} onKeyPress={updateBioHandler} maxLength={50} />
                                     , bioLimit ? <span>{bioLimit}</span> : <></>
                                 ]
                                     :  <span className="user-bio"> {(selectedUser || {}).bio}  </span> 
