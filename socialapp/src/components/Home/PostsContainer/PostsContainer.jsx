@@ -36,8 +36,6 @@ const PostContainer = () =>{
                     </div>
             </div>
             <PostsList />
-            <Button onClick={()=>setShowPostModal(true)}>Add post</Button>
-            {showPostModal && <AddPostModal setShowModal={setShowPostModal}/>}
         </div>
     )
 
