@@ -9,7 +9,6 @@ import {
 } from './index';
 import {withSubroutes} from '../utils/HOC/reactHOCs';
 import MainHome from '../components/MainHome'
-import { Redirect } from 'react-router';
 
 export const HomeRoutes = [
 {    component: withSubroutes( MainHome , 
@@ -48,5 +47,9 @@ export const  RegisterRoutes = [
               {
                 path: "/signup",
                 component: SignUp
+              } ,
+              {
+                path: "*",
+                component: Login
               }
 ]

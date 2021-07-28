@@ -31,13 +31,11 @@ const PostContainer = () =>{
             <div className="add-post-container">
                     <div className="add-post-div">
                         <Avatar icon={<UserOutlined/>} className="profile-avatar" size={45}/>
-                        <TextArea autoSize className="post-area" value={post} onChange={(e)=>setPost(e.target.value)} onKeyPress={handleKeyAddPost}/>
+                        <TextArea autoSize className="post-area" placeholder="Post your thoughts..." value={post} onChange={(e)=>setPost(e.target.value)} onKeyPress={handleKeyAddPost}/>
                         <SendOutlined className="add-post-icon" onClick={handleAddPost}/>
                     </div>
             </div>
             <PostsList />
-            <Button onClick={()=>setShowPostModal(true)}>Add post</Button>
-            {showPostModal && <AddPostModal setShowModal={setShowPostModal}/>}
         </div>
     )
 

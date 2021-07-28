@@ -10,7 +10,6 @@ export const QuotesContextProvider = ({children}) =>{
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        console.log('useEffect tag',tag)
         setLoading(true)
         if(tag) {
           getTagsData(tag)
@@ -21,7 +20,6 @@ export const QuotesContextProvider = ({children}) =>{
             tagData()
     }, [currentUser, tag])
 
-    console.log('quotes' , quotes)
 
     //check again not important
     const getQuoteData = async() =>{
@@ -37,12 +35,10 @@ export const QuotesContextProvider = ({children}) =>{
 
     const tagData = async () =>{
         axios.get('https://api.quotable.io/tags').then(res=>{
-            console.log(res.data)
         })
     }
 
     const getTagsData = async (tag) =>{
-        console.log("outside tag", tag)
         if(tag) {
             console.log("in tags data", tag)
             axios.get(`https://api.quotable.io/quotes?tags=${tag}`)

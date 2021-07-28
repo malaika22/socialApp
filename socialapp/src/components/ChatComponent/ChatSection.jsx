@@ -4,7 +4,13 @@ import './styles.scss'
 
 const ChatSection = () =>{
     return(
-        <ChatBox />
+        <div className="chat-container">
+            <div className="chatSection-header">
+                Chatroom
+            </div>
+            <ChatBox />
+        </div>
+   
     )
 }
 
