@@ -5,16 +5,16 @@
             margin-left: 40px;
             text-align: center;
             background: white;
-            height: 476px;
+            min-height: 476px;
             border-radius: 5px;
             margin-right: 30px;
             position: sticky;
             top: 0;
     .user-profile-info-div{
-                padding: 20px;
+                padding: 10px 20px;
                 font-size: 16px;
             .user-profile-avatar{
-                    margin: 15px 0px;
+                    margin: 11px 0px;
             }
             .user-name-div{
                     padding: 10px 0;
@@ -27,7 +27,18 @@
             .bio-div{
                 padding: 10px 0;
                 .user-bio{
+                    display: inline-block;
+                    width: 100%;
+                    word-break: break-word;
+                }
+                .edit-div{
+                    margin-top: 8px;
+                    .edit-icon{
 
+                    }
+                }
+                .bio-limit-error{
+                    font-size: 12px;
                 }
             }
             .user-general-info{

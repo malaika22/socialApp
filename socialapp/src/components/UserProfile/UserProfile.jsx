@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {Avatar, Button, Input} from 'antd'
-import Icon ,  {UserOutlined} from '@ant-design/icons'
+import Icon ,  {UserOutlined, EditOutlined} from '@ant-design/icons'
 import { PostsContext } from '../../contexts/PostsContext';
 import { UserContext } from '../../contexts/UserContext';
 import Post from '../Home/PostsContainer/Post/Post';
@@ -40,7 +40,7 @@ const UserProfile = ({userId}) =>{
     }
 
     const handleOnChangeBio = (e) =>{
-        if(e.target.value.length <= 10){
+        if(e.target.value.length <= 50){
             setUpdateUserBio(e.target.value)
             setBioLimit("")
         } else {
@@ -60,13 +60,13 @@ const UserProfile = ({userId}) =>{
                             <div className="bio-div">
                                 {
                                     updateBio ? [ 
-                                    <TextArea autoSize showCount value={updateUserBio} onChange={handleOnChangeBio} onKeyPress={updateBioHandler} maxLength={10} />
-                                    , bioLimit ? <span>{bioLimit}</span> : <></>
+                                    <TextArea autoSize showCount value={updateUserBio} onChange={handleOnChangeBio} onKeyPress={updateBioHandler} maxLength={50} />
+                                    , bioLimit ? <span className="bio-limit-error">{bioLimit}</span> : <></>
                                 ]
                                     :  <span className="user-bio"> {(selectedUser || {}).bio}  </span> 
                                 }
 
-                                <Button onClick={handleUpdateButton}>Update bio</Button>
+                                <div onClick={handleUpdateButton} className="edit-div"><EditOutlined className="edit-icon"/></div>
                             </div> : 
                             <div className="bio-div">
                                 <span className="user-bio"> {(selectedUser || {}).bio}  </span> 
