@@ -10,6 +10,7 @@ import App from './App';
 import firebase from './fbConfig'
 import reportWebVitals from './reportWebVitals';
 import { MessagesContextProvider } from './contexts/MessagesContext';
+import { MusicContextProvider } from './contexts/MusicContext';
 import {QuotesContextProvider} from './contexts/QuotesContex'
 
 firebase.auth().onAuthStateChanged(user =>{
@@ -21,7 +22,9 @@ firebase.auth().onAuthStateChanged(user =>{
             <PostsContextProvider>
               <MessagesContextProvider>
                 <QuotesContextProvider>
-                    <App/>
+                  <MusicContextProvider>
+                      <App />
+                  </MusicContextProvider>
                 </QuotesContextProvider>
               </MessagesContextProvider>
             </PostsContextProvider>

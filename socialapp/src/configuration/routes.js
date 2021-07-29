@@ -5,10 +5,12 @@ import {
     ChatSection,
     SignUp,
     QuotesComponent,
-    UserProfile
+    UserProfile,
+    MusicComponent
 } from './index';
 import {withSubroutes} from '../utils/HOC/reactHOCs';
 import MainHome from '../components/MainHome'
+//import MusicComponent from '../components/MusicComponent/MusicComponent';
 
 export const HomeRoutes = [
 {    component: withSubroutes( MainHome , 
@@ -33,7 +35,12 @@ export const HomeRoutes = [
             {
                 path: '/quotes',
                 component: QuotesComponent
-            }
+            } ,
+            {
+                path: "/music",
+                component: MusicComponent
+            } ,
+            
     ] )
 }
 
@@ -47,9 +54,5 @@ export const  RegisterRoutes = [
               {
                 path: "/signup",
                 component: SignUp
-              } ,
-              {
-                path: "*",
-                component: Login
-              }
+              } 
 ]
