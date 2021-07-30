@@ -56,7 +56,7 @@ const UserProfile = ({userId}) =>{
                           <span className="user-name"> {(selectedUser || {}).username}  </span> 
                         </div> 
                         {
-                            selectedUser.uid === currentUser.uid ? 
+                            (selectedUser || {}).uid === (currentUser || {}).uid ? 
                             <div className="bio-div">
                                 {
                                     updateBio ? [ 

@@ -12,37 +12,43 @@ export const UserContextProvider = ({children}) => {
     const history = useHistory()
     const db = firebase.firestore()
     const [userLoading, setUserLoading] = useState(true)
-
+    const [userState, setUserState] = useState(false)
+  
     useEffect(()=>{
-        firebase.auth().onAuthStateChanged(user=>{
-            console.log("in auth changed")
+        console.log(' user load', userLoading)
+        firebase.auth().onAuthStateChanged( user=>{
             if(user) {
                 console.log('in auth user hay')
+                setUserState(true)
                 getCurrentUserData(user)
-              
             }  else {
-                // eslint-disable-next-line no-restricted-globals
-                //history.push('/login')
+                console.log('no user')
+                setCurrentUser(null)
+                setUsers(null)
+               //unsubscribe();
+               history.push("/login")
+
             }
           })
-          console.log(users)
-          //firebase.firestore()
+          setUserLoading(false)
     },[])
 
 
     const getCurrentUserData = (user) =>{
         console.log('get current start')
-        db.collection("users").onSnapshot(snapshot =>{
-             const dataArr = []
-            snapshot.forEach(doc=>{
-                 dataArr.push(doc.data())
-                if(doc.data().uid === user.uid){
-                    setCurrentUser(doc.data())
-                    setFollowers(doc.data().followers)
-                }
-            })
-            setUsers([...dataArr])
-        })
+          db.collection("users")
+           .onSnapshot(snapshot =>{
+                    const dataArr = []
+                    snapshot.forEach(doc=>{
+                        dataArr.push(doc.data())
+                        if(doc.data().uid === user.uid){
+                            setCurrentUser(doc.data())
+                            setFollowers(doc.data().followers)
+                        }
+                    })
+                    setUsers([...dataArr])
+                    console.log('no error')
+                })
     }
 
     const handleBioUpdate = (docId, updatedBio) =>{
@@ -53,11 +59,12 @@ export const UserContextProvider = ({children}) => {
 
 
    const handleLogout = () =>{
+        //unsubscribe();
         firebase.auth().signOut()
         .then(res=>{
             console.log('in handle logout')
-            //history.push('/login')
-            setCurrentUser(null)
+            //setUsers(null)
+            setUserState(false)
         })
         .catch(err => {
             console.log("error logging out" , err)
@@ -81,8 +88,10 @@ export const UserContextProvider = ({children}) => {
             users: users,
             followers : followers,
             addFollower : addFollower,
-            handleBioUpdate : handleBioUpdate
+            handleBioUpdate : handleBioUpdate,
             //gettingFollowersUser: gettingFollowersUser
+            userLoading: userLoading,
+            userState: userState
         }}>
             {children}
         </UserContext.Provider>
