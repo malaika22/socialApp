@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import ReactJkMusicPlayer, {ReactJkMusicPlayerAudioInfo}  from 'react-jinke-music-player'
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/src/styles.scss';
 import { MusicContext } from '../../contexts/MusicContext';

@@ -12,7 +12,7 @@ const SignUp = () =>{
         username: '',
         uid: '',
         email: '',
-        bio: '',
+        bio: 'I love spark',
         gender: '',
         password: '',
         dateOfBirth: '',

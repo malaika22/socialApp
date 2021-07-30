@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
 import "antd/dist/antd.css";
 //import '@fortawesome/fontawesome-free/svgs'
-import {UserContextProvider} from './contexts/UserContext'
+import {UserContext, UserContextProvider} from './contexts/UserContext'
 import {PostsContextProvider} from './contexts/PostsContext'
 import './index.css';
 import App from './App';
@@ -39,11 +39,7 @@ firebase.auth().onAuthStateChanged(user =>{
       <React.StrictMode>
         <BrowserRouter>
           <UserContextProvider>
-            <PostsContextProvider>
-              <MessagesContextProvider>
-                  <App />
-              </MessagesContextProvider>
-            </PostsContextProvider>
+            <App />
           </UserContextProvider>
         </BrowserRouter>
       </React.StrictMode>,
@@ -51,7 +47,7 @@ firebase.auth().onAuthStateChanged(user =>{
     )
   }
 }
-)
+) 
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

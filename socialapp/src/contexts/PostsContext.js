@@ -10,18 +10,16 @@ export const PostsContextProvider = ({children}) =>{
     const db = firebase.firestore()
     const {currentUser, followers} = useContext(UserContext)
     const [posts, setPosts] = useState([])
-   // const [commnt ,setCommnt] = useState(true)
-   //console.log(commnt)
     useEffect(()=>{
-        console.log('in useEffect PostContext')
-        db.collection("posts").onSnapshot(snapshot => {
-            const dataArr =[]
-            snapshot.forEach(doc => {
-                dataArr.push(doc.data())
-            })
-            setPosts(dataArr)
+            console.log('current user post')
+            db.collection("posts").onSnapshot(snapshot => {
+                const dataArr =[]
+                snapshot.forEach(doc => {
+                    dataArr.push(doc.data())
+                })
+                setPosts(dataArr)
         })
-    }, [currentUser])
+    }, [currentUser, followers])
 
     //const sortingPosts = (dataArr) =>{
       // const sortedPost =  _.sortBy(dataArr, (o)=>{

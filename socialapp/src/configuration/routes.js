@@ -10,6 +10,7 @@ import {
 } from './index';
 import {withSubroutes} from '../utils/HOC/reactHOCs';
 import MainHome from '../components/MainHome'
+import { Redirect } from 'react-router-dom';
 //import MusicComponent from '../components/MusicComponent/MusicComponent';
 
 export const HomeRoutes = [
@@ -39,7 +40,11 @@ export const HomeRoutes = [
             {
                 path: "/music",
                 component: MusicComponent
-            } ,
+            }  ,
+            {
+                path: "/login" ,
+                component: () => {return <Redirect to="/"/>}
+            }
             
     ] )
 }

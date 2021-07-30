@@ -4,6 +4,7 @@ import { Button, Menu, Layout, Dropdown, Avatar } from 'antd'
 import { UserOutlined, CaretDownOutlined, HomeFilled, WechatFilled } from '@ant-design/icons';
 import Icon from '@ant-design/icons'
 import { UserContext } from '../../contexts/UserContext'
+import sparkLogo from '../../assests/sparkLogo.png'
 import './styles.scss'
 
 
@@ -34,7 +35,7 @@ const HomeLayout = ({children}) =>{
 
     const logoutHandler = () =>{
         console.log('in lohing out')
-        history.push('/login')
+        //history.push('/login')
         handleLogout()
     }
 
@@ -56,7 +57,13 @@ const HomeLayout = ({children}) =>{
        
         <div className="nav-main-div">
             <div className="logo-div">
-                <Link to="/">Logo</Link>
+                <Link to="/"><img src={sparkLogo} alt="Spark"
+                style={{
+                    width: "115px" ,
+                    marginLeft: "40px", 
+                    marginTop: "17px"
+                }}
+                /></Link>
             </div>
             <div className="nav-div">
                 <Menu onClick={handleMenuClick} mode="horizontal" selectedKeys={[current]} className="nav-menu">
