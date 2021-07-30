@@ -57,7 +57,7 @@ const HomeLayout = ({children}) =>{
        
         <div className="nav-main-div">
             <div className="logo-div">
-                <Link to="/"><img src={sparkLogo} alt="Spark"
+                <Link to="/"><img src={`../../assests/sparkLogo.png`} alt="Spark"
                 style={{
                     width: "115px" ,
                     marginLeft: "40px", 
