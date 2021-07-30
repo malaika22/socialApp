@@ -12,7 +12,6 @@ const Login = () =>{
   const {Content} = Layout
   const history = useHistory()
   const {currentUser} = useContext(UserContext)
-  console.log(currentUser)
     const [credentials, setCredentials] = useState(
       {
         email: '',
@@ -20,6 +19,7 @@ const Login = () =>{
         error: ''
       }
     )
+    console.log(currentUser)
 
     const changeHandler = (e) =>{
         setCredentials({
