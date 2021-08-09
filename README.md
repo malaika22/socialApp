@@ -1,6 +1,6 @@
 # Spark
 
-### A Spark is social interactive application implementing the following features:-
+### Spark is social interactive application implementing the following features:-
 1. Create Posts
 2. Follow users
 3. Like posts/comment on posts
