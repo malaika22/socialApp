@@ -1,0 +1,23 @@
+.tags-main-div{
+     padding: 30px;
+     padding-top: 40px;
+    .tags-header{
+        margin-bottom: 30px;
+        color: #574052;
+        font-size: 18px;
+    }
+    .tags-div{
+        display: flex;
+        flex-wrap: wrap;
+        .tags{
+            margin-right: 10px;
+            padding: 5px 10px;
+            background: #f0f0f1;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            cursor: pointer;
+
+        }
+    }
+}

@@ -1,0 +1,124 @@
+.post-card-main-div{
+    display: flex;
+    width: 100%;
+    background: whitw;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 15px 35px  rgba(50,50,93,0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    .post-card-avatar-div{
+        margin-right: 20px;
+        padding-top: 5px;
+        .user-dp{
+            
+        }
+    }
+    .post-card-desc-div{
+          width: 542px;
+        word-wrap: break-word;
+        .post-author-div{
+            font-size: 16px;
+            font-weight: 700;
+            padding: 5px 0 5px 0;
+            a{
+                color: #574052 !important ;
+            }
+        }
+        .post-date-div{
+            color: #828282 ;
+            //padding: 5px 0 5px 0;
+        }
+        .postDesc-div{
+            padding: 10px 20px 5px 0px;
+            line-height: 1.9;
+        }
+        .likes-comments-div{
+            padding: 5px 0 5px 0;
+            .likes-comments{
+                display: flex;
+                font-size: 14px;
+                margin-right: 5px;
+                .likes-div{
+                    margin-right: 20px;
+                    .likes-type{
+                        margin-right: 5px;
+                    }
+                    .noOfLikes-div{
+                        font-size: 14px;
+                        color:#828282 ;
+                        .sparks-title{
+                            margin-left: 5px;
+                        }
+                    }
+                }
+                .comments-div{
+                    color: #828282;
+                }
+
+            }
+            .comments-area{
+                margin: 11px 0 5px 0;
+                position: relative;
+                .comment-avatar{
+                    position: absolute;
+                    left: 0px;
+                   // margin-left: 10px;
+                  //  margin-top: 11px;
+                  //  margin-right: 10px;
+                    left: 6px;
+                    margin: 6px;
+                    width: 27px  !important;
+                    height: 26px !important;
+                    /* height: 29px; */
+                    line-height: 26px;
+                    font-size: 13px;
+                }
+                .comment-area{
+                        position: relative;
+                        padding: 6px 35px 7px 46px;
+                        border-radius: 20px;
+                        //height: 42px !important;
+                }
+                .send-comment-icon{
+                       position: absolute;
+                        right: 6px;
+                        padding: 9px;
+                        padding-top: 13px;
+                        color:#F97C50 ;
+                }
+
+                .recent-comments-main-container{
+                        .comments-main-container{
+                            display: flex;
+                            width: 100%;
+                            margin: 15px 0;
+                            .display-comment-avatar{
+                                margin-right: 11px;
+                            }
+                            .show-comment-div{
+                                width: 100%;
+                                padding: 20px;
+                                background: #f2f2f2;
+                                padding: 10px 20px 10px 20px;
+                                border-radius: 20px;
+                                .comment-author{
+                                        color: #333;
+                                        font-weight: 700;
+                                }
+                                .comment{
+                                        line-height: 16px;
+                                        padding: 5px 0px;
+                                        font-size: 12px;
+                                }
+                                .comment-time{
+                                        font-size: 10px;
+                                }
+                            }
+                        }
+                }
+            }
+
+        }
+    }
+}

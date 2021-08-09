@@ -1,0 +1,94 @@
+.user-profile-main-div{
+    display: flex;
+    .user-profile-inner-div{
+            width: 30%;
+            margin-left: 40px;
+            text-align: center;
+            background: white;
+            min-height: 476px;
+            border-radius: 5px;
+            margin-right: 30px;
+            position: sticky;
+            top: 0;
+    .user-profile-info-div{
+                padding: 10px 20px;
+                font-size: 16px;
+            .user-profile-avatar{
+                    margin: 11px 0px;
+            }
+            .user-name-div{
+                    padding: 10px 0;
+                    font-size: 20px;
+                    font-weight: 700;
+                .user-name{
+                    color:#574052 ;
+                }
+            }
+            .bio-div{
+                padding: 10px 0;
+                .user-bio{
+                    display: inline-block;
+                    width: 100%;
+                    word-break: break-word;
+                }
+                .edit-div{
+                    margin-top: 8px;
+                    .edit-icon{
+
+                    }
+                }
+                .bio-limit-error{
+                    font-size: 12px;
+                }
+            }
+            .user-general-info{
+                text-align: start;
+                /* font-weight: 600; */
+                color: #828282;
+                padding-top: 10px;
+                padding-left: 20px;
+
+            .user-birth-div{
+                padding: 10px 0px;
+                .profile-icons{
+                    width: 20px;
+                    margin-right: 10px;
+                }
+                .user-birth{
+
+                }
+            }
+            .gender-div{
+                padding: 10px 0px;
+                .user-gender{
+
+                }
+                .gender-icons{
+                    font-size: 20px;
+                    margin-right: 10px;
+                }
+            }
+
+            .followers-div{
+                padding: 10px 0;
+                .followers-number{
+                    margin-right: 10px;
+                }
+            }
+            .following-div{
+                padding: 10px 0px;
+                .following-number{
+                    margin-right: 10px;
+                }
+            }
+            }
+
+        }
+        .user-posts-div{
+            .posts-container{
+
+            }
+        }
+    }
+
+}
